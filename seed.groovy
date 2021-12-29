@@ -18,13 +18,13 @@ folder('CI-pipeline') {
     displayName('CI-pipeline')
     description('CI-pipeline')
 }
-pipelineJob('CI-pipeline/catalogue') {
+pipelineJob('CI-pipeline/payment') {
     configure { flowdefinition ->
         flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
             'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
                 'userRemoteConfigs' {
                     'hudson.plugins.git.UserRemoteConfig' {
-                        'url'('https://github.com/siddhudeva/catalogue.git')
+                        'url'('https://github.com/siddhudeva/payment.git')
                     }
                 }
                 'branches' {
