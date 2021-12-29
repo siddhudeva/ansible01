@@ -1,7 +1,7 @@
 def call() {
     pipeline {
         agent {
-            label 'workstation'
+            label '${BUILD_LABEL}'
         }
         triggers {
             pollSCM('*/2 * * * *')
@@ -9,7 +9,7 @@ def call() {
         stages {
             stage('One-Sequential') {
                 steps {
-                    sh 'sleep 45'
+                    sh 'echo ${COMPONENT} is success'
                 }
             }
             stage('Two-Parallel') {
@@ -23,6 +23,7 @@ def call() {
                     stage('Two2') {
                         steps {
                             sh 'sleep 90'
+                            sh 'echo ${BUILD_LABEL}'
                         }
                     }
 
