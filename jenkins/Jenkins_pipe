@@ -1,0 +1,11 @@
+pipeline {
+  agent any
+
+  stages {
+    stage( 'ansible playbook run' ) {
+      steps {
+        sh 'echo helloworld this is pipeline for intergration'
+      }
+    }
+  }
+}
