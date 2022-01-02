@@ -3,9 +3,6 @@ def call() {
         agent {
             label "${BUILD_LABEL}"
         }
-        triggers {
-            pollSCM('H/2 * * * *')
-        }
 //        stages {
 //            stage() {
 //                steps {
