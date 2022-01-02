@@ -19,6 +19,7 @@ folder('CI-pipeline') {
     description('CI-pipeline')
 }
 parameters { text(name: 'COMPONENT', defaultValue: 'user\ncatalogue\ncart\npayment', description: '') }
+
 pipelineJob('CI-pipeline/${COMPONENT}') {
     configure { flowdefinition ->
         flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
