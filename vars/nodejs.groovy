@@ -12,14 +12,13 @@ def call() {
                     sh 'echo ${COMPONENT} is success'
                 }
             }
-        }
-        stage('Check the Code Quality') {
-            steps {
-                script {
-                    common.sonarQube()
+            stage() {
+                steps {
+                    script{
+                        common.sonarQube()
+                    }
                 }
             }
         }
-
     }
 }
