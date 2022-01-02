@@ -6,19 +6,59 @@ def call() {
         triggers {
             pollSCM('H/2 * * * *')
         }
+//        stages {
+//            stage() {
+//                steps {
+//                    sh 'echo ${COMPONENT} is success'
+//                }
+//            }
+//            stage() {
+//                steps {
+//                    script{
+//                        common.sonarQube()
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
+
         stages {
-            stage() {
+
+
+            stage('Check the Code Quality') {
                 steps {
-                    sh 'echo ${COMPONENT} is success'
-                }
-            }
-            stage() {
-                steps {
-                    script{
+                    script {
                         common.sonarQube()
                     }
                 }
             }
+
+            stage('Lint Checks') {
+                steps {
+                    sh 'echo Lint Cases'
+                }
+            }
+
+            stage('Test Cases') {
+                steps {
+                    sh 'echo Test Cases'
+                }
+            }
+
+            stage('Publish Artifacts') {
+                steps {
+                    sh 'echo Publish Artifacts'
+                }
+            }
+
         }
+
+        post {
+            always {
+                cleanWs()
+            }
+        }
+
     }
 }
