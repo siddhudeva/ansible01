@@ -27,7 +27,6 @@ def call() {
                 steps {
                     script {
                         common.sonarQube()
-                        echo sonar
                     }
                 }
             }
@@ -35,6 +34,7 @@ def call() {
             stage('Lint Checks') {
                 steps {
                     sh 'echo Lint Cases'
+                    sh 'echo lint '
                 }
             }
 
