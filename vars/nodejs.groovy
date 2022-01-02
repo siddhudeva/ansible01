@@ -27,6 +27,7 @@ def call() {
                 steps {
                     script {
                         common.sonarQube()
+                        echo sonar
                     }
                 }
             }
