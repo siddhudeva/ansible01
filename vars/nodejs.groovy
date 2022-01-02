@@ -1,36 +1,25 @@
 def call() {
     pipeline {
         agent {
-            label '${BUILD_LABEL}'
+            label $ '{BUILD_LABEL}'
         }
         triggers {
-            pollSCM('*/2 * * * *')
+            pollSCM('H/2 * * * *')
         }
         stages {
-            stage('One-Sequential') {
+            stage() {
                 steps {
                     sh 'echo ${COMPONENT} is success'
                 }
             }
-            stage('Two-Parallel') {
-                parallel {
-
-                    stage('Two1') {
-                        steps {
-                            sh 'sleep 60'
-                        }
-                    }
-                    stage('Two2') {
-                        steps {
-                            sh 'sleep 90'
-                            sh 'echo ${BUILD_LABEL}'
-                        }
-                    }
-
+        }
+        stage('Check the Code Quality') {
+            steps {
+                script {
+                    common.sonarQube()
                 }
             }
-
         }
-    }
 
+    }
 }
