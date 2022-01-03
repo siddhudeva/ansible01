@@ -93,21 +93,6 @@ def call() {
                     }
                 }
             }
-
-            stage('tags purpose') {
-                steps {
-                    echo 'This is fot tags'
-                }
-                steps
-                        {
-                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE')
-                                    {
-                                        SomeCodeThatCanBeErrored
-                                    }
-                        }
-            }
-
-
             stage('publish artificates') {
                 steps {
                     echo 'This is for publishing artifacts'
