@@ -1,26 +1,89 @@
+//def call() {
+//    pipeline {
+//        agent {
+//            label "${BUILD_LABEL}"
+//        }
+////        stages {
+////            stage() {
+////                steps {
+////                    sh 'echo ${COMPONENT} is success'
+////                }
+////            }
+////            stage() {
+////                steps {
+////                    script{
+////                        common.sonarQube()
+////                    }
+////                }
+////            }
+////        }
+////    }
+////}
+//
+//        stages {
+//
+//
+//            stage('Check the Code Quality') {
+//                steps {
+//                    script {
+//                        common.sonarQube()
+//                    }
+//                }
+//            }
+//
+////            stage('Lint Checks') {
+////                steps {
+////                    sh 'echo Lint Cases'
+////                    sh 'echo lint '
+////                }
+////            }
+////
+////            stage('Test Cases') {
+////                steps {
+////                    sh 'echo Test Cases'
+////                }
+////            }
+////
+////            stage('Publish Artifacts') {
+////                steps {
+////                    sh 'echo Publish Artifacts'
+////                }
+////            }
+////
+////        }
+//
+//            post {
+//                always {
+//                    cleanWs()
+//                }
+//            }
+//
+//        }
+//    }
+//}
+
+
+
 def call() {
     pipeline {
         agent {
             label "${BUILD_LABEL}"
         }
-//        stages {
-//            stage() {
+
+        triggers {
+            pollSCM('H/2 * * * *')
+        }
+
+        stages {
+
+//            stage('Label Builds') {
 //                steps {
-//                    sh 'echo ${COMPONENT} is success'
-//                }
-//            }
-//            stage() {
-//                steps {
-//                    script{
-//                        common.sonarQube()
+//                    script {
+//                        def gitTag = GIT_BRANCH.split('/').last()
+//                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${gitTag}"
 //                    }
 //                }
 //            }
-//        }
-//    }
-//}
-
-        stages {
 
 
             stage('Check the Code Quality') {
@@ -30,34 +93,7 @@ def call() {
                     }
                 }
             }
-
-//            stage('Lint Checks') {
-//                steps {
-//                    sh 'echo Lint Cases'
-//                    sh 'echo lint '
-//                }
-//            }
-//
-//            stage('Test Cases') {
-//                steps {
-//                    sh 'echo Test Cases'
-//                }
-//            }
-//
-//            stage('Publish Artifacts') {
-//                steps {
-//                    sh 'echo Publish Artifacts'
-//                }
-//            }
-//
-//        }
-
-            post {
-                always {
-                    cleanWs()
-                }
-            }
-
         }
     }
+
 }
