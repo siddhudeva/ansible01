@@ -93,6 +93,13 @@ def call() {
                     }
                 }
             }
+
+            stage('tags purpose') {
+                steps {
+                    echo 'This is fot tags'
+                }
+            }
+
         }
     }
 
