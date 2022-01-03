@@ -100,6 +100,12 @@ def call() {
                 }
             }
 
+            stage('publish artificates') {
+                steps {
+                    echo 'This is for publishing artifacts'
+                }
+            }
+
         }
     }
 
