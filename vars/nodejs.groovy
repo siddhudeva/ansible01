@@ -98,7 +98,15 @@ def call() {
                 steps {
                     echo 'This is fot tags'
                 }
+                steps
+                        {
+                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE')
+                                    {
+                                        SomeCodeThatCanBeErrored
+                                    }
+                        }
             }
+
 
             stage('publish artificates') {
                 steps {
