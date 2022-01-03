@@ -1,4 +1,4 @@
 def sonarQube() {
-    sonar-scanner '-Dsonar.projectKey=cart -Dsonar.sources=. '
+    sh 'sonar-scanner -Dsonar.projectKey=cart -Dsonar.sources=. '
 
 }
