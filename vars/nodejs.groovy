@@ -31,32 +31,33 @@ def call() {
                 }
             }
 
-            stage('Lint Checks') {
-                steps {
-                    sh 'echo Lint Cases'
-                    sh 'echo lint '
-                }
-            }
+//            stage('Lint Checks') {
+//                steps {
+//                    sh 'echo Lint Cases'
+//                    sh 'echo lint '
+//                }
+//            }
+//
+//            stage('Test Cases') {
+//                steps {
+//                    sh 'echo Test Cases'
+//                }
+//            }
+//
+//            stage('Publish Artifacts') {
+//                steps {
+//                    sh 'echo Publish Artifacts'
+//                }
+//            }
+//
+//        }
 
-            stage('Test Cases') {
-                steps {
-                    sh 'echo Test Cases'
-                }
-            }
-
-            stage('Publish Artifacts') {
-                steps {
-                    sh 'echo Publish Artifacts'
+            post {
+                always {
+                    cleanWs()
                 }
             }
 
         }
-
-        post {
-            always {
-                cleanWs()
-            }
-        }
-
     }
 }
