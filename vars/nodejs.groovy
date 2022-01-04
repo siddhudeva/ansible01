@@ -18,6 +18,15 @@ def call() {
                 }
             }
 
+            stage('Deploy') {
+                when { tag "release-*" }
+                steps {
+                    echo 'Deploying only because this commit is tagged...'
+                    sh 'make deploy'
+                }
+            }
+
+
             stage('Check the Code Quality') {
                 steps {
                     script {
