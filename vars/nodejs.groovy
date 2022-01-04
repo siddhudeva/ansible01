@@ -28,6 +28,7 @@ def call() {
             stage('Lint checks') {
                 steps {
                     echo 'lint checks'
+                   sh 'echo env'
                 }
             }
 
