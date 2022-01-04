@@ -93,14 +93,20 @@ def call() {
                     }
                 }
             }
-            stage('publish artificates') {
+            stage('publishartifacts') {
                 steps {
                     echo 'This is for publishing artifacts'
-                    echo 'username=admin password=andglka'
+                }
+            }
+
+            stage('publishartifactes') {
+                steps {
+                    stage{
+                        common.Pubishartifacts()
+                    }
                 }
             }
 
         }
     }
-
 }
