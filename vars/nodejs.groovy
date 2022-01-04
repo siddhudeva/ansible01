@@ -25,7 +25,7 @@ def call() {
 
             stage('publish artifactes') {
                 steps {
-                    stage{
+                    script{
                         common.Pubishartifacts()
                     }
                 }
