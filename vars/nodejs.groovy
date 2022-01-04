@@ -20,19 +20,22 @@ def call() {
             stage('Lint checks') {
                 steps {
                     echo 'lint checks'
-                    echo 'env'
                 }
             }
 
             stage('publish artifactes') {
                 steps {
-                    echo 'waiting for conformation'
-//                    script{
-////                        common.Pubishartifacts()
-//                    }
+                    script{
+                        common.Pubishartifacts()
+                    }
                 }
             }
+            stage('sample') {
+                steps {
+                    echo 'sample'
+                }
 
+            }
         }
     }
 }
