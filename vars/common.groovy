@@ -11,6 +11,6 @@ def Pubishartifacts() {
     println '(This is ran on tag)'
   }
   else {
-    Utils.markStageSkippedForConditional('publish artifactes')
+    Utils.markStageSkippedForConditional('sample')
   }
 }
