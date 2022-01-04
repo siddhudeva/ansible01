@@ -1,9 +1,9 @@
 def call() {
     pipeline{
-     agent {
+      agent {
          label "WORKSATION"
-     }
-     stages{
+      }
+      stages{
          stage('lint checks') {
              steps{
                  echo 'lint checks'
@@ -32,7 +32,7 @@ def call() {
                  cleanWs
              }
          }
-     }
+      }
     }
 }
 
