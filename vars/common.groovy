@@ -13,7 +13,7 @@ def Pubishartifacts() {
   }
 }
 
-//def Pubishartifacts() {
+//def Pubisha rtifacts() {
 //  if(env.GIT_BRANCH == "*tag*") {
 //    println 'this is ran on tag'
 //  }
