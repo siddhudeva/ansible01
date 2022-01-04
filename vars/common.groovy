@@ -6,14 +6,14 @@ def sonarQube() {
 }
 
 def Pubishartifacts() {
-  if(env.GIT_BRANCH == "*tag*") {
-    Utils.markStageSkippedForConditional('publish artifactes')
-  } else {
+  if(env.GIT_BRANCH == "*Tag*") {
     println 'Ran on Tag'
+  } else {
+    Utils.markStageSkippedForConditional('publish artifactes')
   }
 }
 
-//def Pubisha rtifacts() {
+//def Pubishatifacts() {
 //  if(env.GIT_BRANCH == "*tag*") {
 //    println 'this is ran on tag'
 //  }
