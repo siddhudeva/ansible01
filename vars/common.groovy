@@ -1,19 +1,26 @@
-import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
+//import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 
-def sonarQube() {
-//   sh 'sonar-scanner -Dsonar.projectKey=${COMPONENT} -Dsonar.sources=. -Dsonar.host.url=http://172.31.12.143:9000 -Dsonar.login=d88bdf934eacc465d4200a82cca6650da40d17f7'
-  sh 'echo sonarqube test is ok'
+def Publish() {
+  echo 'This is working fine'
+
 }
 
-def prepareArtifacts() {
+
+
+//def sonarQube() {
+//   sh 'sonar-scanner -Dsonar.projectKey=${COMPONENT} -Dsonar.sources=. -Dsonar.host.url=http://172.31.12.143:9000 -Dsonar.login=d88bdf934eacc465d4200a82cca6650da40d17f7'
+//  sh 'echo sonarqube test is ok'
+//}
+
+//def prepareArtifacts() {
 //  if(env.GIT_BRANCH == "*tag*") {
 //    echo 'This is ran by tag'
 //  } else {
 //    Utils.markStageSkippedForConditional('Publish Artifacts')
 //  }
 
-  echo 'it worked'
-}
+//  echo 'it worked'
+//}
 
 //  if (env.GIT_BRANCH == 'master') {
 //  echo 'I only execute on the master branch'
