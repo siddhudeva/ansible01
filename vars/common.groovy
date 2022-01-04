@@ -7,7 +7,7 @@ def sonarQube() {
 }
 
 def Pubishartifacts() {
-  if(env.GIT_BRANCH == "*/tag/*") {
+  if(env.GIT_BRANCH == "*tag*") {
     println 'this is ran on tag'
   }
   else {
