@@ -15,15 +15,15 @@ def call() {
 //        }
 
         stages {
-//
-//            stage('Label Builds') {
-//                steps {
-//                    script {
-//                        env.gitTag = GIT_BRANCH.split('/').last()
-//                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${gitTag}"
-//                    }
-//                }
-//            }
+
+            stage('Label Builds') {
+                steps {
+                    script {
+                        env.gitTag = GIT_BRANCH.split('/').last()
+                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${gitTag}"
+                    }
+                }
+            }
 
 
             stage('Check the Code Quality') {
@@ -39,39 +39,35 @@ def call() {
                     sh 'echo Lint Cases'
                 }
             }
+            stage('Test Cases') {
+                steps {
+                    sh 'echo Test Cases'
+                    sh 'env'
+                }
+            }
+
+            stage('Publish Artifacts') {
+                when {
+                    expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true']) }
+                }
+                steps {
+                    script {
+                        common.prepareArtifacts()
+                        common.publishArtifacts()
+                    }
+                }
+            }
+
+
+            post {
+                always {
+                    cleanWs()
+                }
+            }
+
         }
     }
 }
-//            stage('Test Cases') {
-//                steps {
-//                    sh 'echo Test Cases'
-//                    sh 'env'
-//                }
-//            }
-
-//            stage('Publish Artifacts') {
-//                when {
-//                    expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true' ]) }
-//                }
-//                steps {
-//                    script {
-//                        common.prepareArtifacts()
-//                        common.publishArtifacts()
-//                    }
-//                }
-//            }
-//
-//        }
-
-//            post {
-//                always {
-//                    cleanWs()
-//                }
-//            }
-//
-//        }
-//    }
-
 
 //def call() {
 //    pipeline{
