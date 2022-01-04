@@ -38,6 +38,7 @@ def call() {
                     }
                 }
             }
+
             stage('sample') {
                 steps {
                     echo 'sample'
