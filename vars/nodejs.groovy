@@ -86,7 +86,7 @@ def call() {
 //                }
 //            }
 //
-////            stage('Lint Checks') {
+////            stage('Lint Check') {
 ////                steps {
 ////                    sh 'echo Lint Cases'
 ////                    sh 'echo lint '
