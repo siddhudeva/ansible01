@@ -8,9 +8,9 @@ def sonarQube() {
 
 def Pubishartifacts() {
   if(env.GIT_BRANCH == "*/tag/*") {
-    println '(This is ran on tag)'
+    println 'this is ran on tag'
   }
   else {
-    Utils.markStageSkippedForConditional('sample')
+    Utils.markStageSkippedForConditional('publish artifactes')
   }
 }
