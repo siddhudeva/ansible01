@@ -14,7 +14,7 @@ def call() {
 //            NEXUS = credentials('NEXUS')
 //        }
 
-//        stages {
+        stages {
 //
 //            stage('Label Builds') {
 //                steps {
@@ -26,20 +26,22 @@ def call() {
 //            }
 
 
-        stage('Check the Code Quality') {
-            steps {
-                script {
-                    common.sonarQube()
+            stage('Check the Code Quality') {
+                steps {
+                    script {
+                        common.sonarQube()
+                    }
+                }
+            }
+
+            stage('Lint Checks') {
+                steps {
+                    sh 'echo Lint Cases'
                 }
             }
         }
-
-        stage('Lint Checks') {
-            steps {
-                sh 'echo Lint Cases'
-            }
-        }
-
+    }
+}
 //            stage('Test Cases') {
 //                steps {
 //                    sh 'echo Test Cases'
@@ -248,8 +250,5 @@ def call() {
 //
 //        }
 //    }
-// }
-//
-    }
-}
+// }}
 
