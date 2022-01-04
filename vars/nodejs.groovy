@@ -1,3 +1,53 @@
+def call() {
+    pipeline {
+        agent {
+            label "${BUILD_LABEL}"
+        }
+
+        triggers {
+            pollSCM('H/2 * * * *')
+        }
+
+        stages {
+
+            stage('Check the Code Quality') {
+                steps {
+                    script {
+                        common.sonarQube()
+                    }
+                }
+            }
+            stage('Lint checks') {
+                steps {
+                    echo 'lint checks'
+                }
+            }
+
+            stage('publish artifactes') {
+                steps {
+                    stage{
+                        common.Pubishartifacts()
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+
+
+
+
+//            stage('Label Builds') {
+//                steps {
+//                    script {
+//                        def gitTag = GIT_BRANCH.split('/').last()
+//                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${gitTag}"
+//                    }
+//                }
+//            }
+
 //def call() {
 //    pipeline {
 //        agent {
@@ -63,50 +113,3 @@
 //}
 
 
-
-def call() {
-    pipeline {
-        agent {
-            label "${BUILD_LABEL}"
-        }
-
-        triggers {
-            pollSCM('H/2 * * * *')
-        }
-
-        stages {
-
-//            stage('Label Builds') {
-//                steps {
-//                    script {
-//                        def gitTag = GIT_BRANCH.split('/').last()
-//                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${gitTag}"
-//                    }
-//                }
-//            }
-
-
-            stage('Check the Code Quality') {
-                steps {
-                    script {
-                        common.sonarQube()
-                    }
-                }
-            }
-            stage('publishartifacts') {
-                steps {
-                    echo 'This is for publishing artifacts'
-                }
-            }
-
-            stage('publishartifactes') {
-                steps {
-                    stage{
-                        common.Pubishartifacts()
-                    }
-                }
-            }
-
-        }
-    }
-}
