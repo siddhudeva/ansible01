@@ -26,9 +26,10 @@ def call() {
 
             stage('publish artifactes') {
                 steps {
-                    script{
-//                        common.Pubishartifacts()
-                    }
+                    echo 'waiting for conformation'
+//                    script{
+////                        common.Pubishartifacts()
+//                    }
                 }
             }
 
