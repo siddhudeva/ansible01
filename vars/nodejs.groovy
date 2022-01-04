@@ -8,44 +8,44 @@ def call() {
 //      pollSCM('H/2 * * * *')
 //    }
 
-        environment {
-            PROG_LANG_NAME = "nodejs"
-            PROG_LANG_VERSION = "6"
-            NEXUS = credentials('NEXUS')
+//        environment {
+//            PROG_LANG_NAME = "nodejs"
+//            PROG_LANG_VERSION = "6"
+//            NEXUS = credentials('NEXUS')
+//        }
+
+//        stages {
+//
+//            stage('Label Builds') {
+//                steps {
+//                    script {
+//                        env.gitTag = GIT_BRANCH.split('/').last()
+//                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${gitTag}"
+//                    }
+//                }
+//            }
+
+
+        stage('Check the Code Quality') {
+            steps {
+                script {
+                    common.sonarQube()
+                }
+            }
         }
 
-        stages {
-
-            stage('Label Builds') {
-                steps {
-                    script {
-                        env.gitTag = GIT_BRANCH.split('/').last()
-                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${gitTag}"
-                    }
-                }
+        stage('Lint Checks') {
+            steps {
+                sh 'echo Lint Cases'
             }
+        }
 
-
-            stage('Check the Code Quality') {
-                steps {
-                    script {
-                        common.sonarQube()
-                    }
-                }
-            }
-
-            stage('Lint Checks') {
-                steps {
-                    sh 'echo Lint Cases'
-                }
-            }
-
-            stage('Test Cases') {
-                steps {
-                    sh 'echo Test Cases'
-                    sh 'env'
-                }
-            }
+//            stage('Test Cases') {
+//                steps {
+//                    sh 'echo Test Cases'
+//                    sh 'env'
+//                }
+//            }
 
 //            stage('Publish Artifacts') {
 //                when {
@@ -61,14 +61,14 @@ def call() {
 //
 //        }
 
-            post {
-                always {
-                    cleanWs()
-                }
-            }
-
-        }
-    }
+//            post {
+//                always {
+//                    cleanWs()
+//                }
+//            }
+//
+//        }
+//    }
 
 
 //def call() {
@@ -249,6 +249,7 @@ def call() {
 //        }
 //    }
 // }
-
-
+//
+    }
 }
+
