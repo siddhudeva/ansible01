@@ -1,7 +1,7 @@
 def call() {
     pipeline{
       agent {
-         label "WORKSATION"
+         label "BUILD_LABEL"
       }
       stages{
          stage('lint checks') {
