@@ -20,13 +20,13 @@ def call() {
              }
          }
 
-         stage('publish artifacts') {
-             steps{
-                 stages{
-                     common.Publish()
-                 }
-             }
-         }
+//         stage('publish artifacts') {
+//             steps{
+//                 stages{
+//                     common.Publish()
+//                 }
+//             }
+//         }
          post{
              always{
                  cleanWs
