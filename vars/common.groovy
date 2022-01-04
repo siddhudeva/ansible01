@@ -6,11 +6,13 @@ def sonarQube() {
 }
 
 def prepareArtifacts() {
-  if(env.GIT_BRANCH == "*tag*") {
-    echo 'This is ran by tag'
-  } else {
-    Utils.markStageSkippedForConditional('Publish Artifacts')
-  }
+//  if(env.GIT_BRANCH == "*tag*") {
+//    echo 'This is ran by tag'
+//  } else {
+//    Utils.markStageSkippedForConditional('Publish Artifacts')
+//  }
+
+  echo 'it worked'
 }
 
 //  if (env.GIT_BRANCH == 'master') {
