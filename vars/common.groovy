@@ -5,14 +5,14 @@ def sonarQube() {
   sh 'echo sonarqube test is ok'
 }
 
-def Pubishartifacts() {
+def prepareArtifacts() {
   if(env.GIT_BRANCH == "*tag*") {
     echo 'This is ran by tag'
   } else {
-    Utils.markStageSkippedForConditional('publish artifactes')
+    Utils.markStageSkippedForConditional('Publish Artifacts')
   }
 }
-//
+
 //  if (env.GIT_BRANCH == 'master') {
 //  echo 'I only execute on the master branch'
 //} else {
@@ -27,5 +27,5 @@ def Pubishartifacts() {
 //  }
 //  else {
 //    Utils.markStageSkippedForConditional('publish artifactes')
-//rdhf  }
+// }
 //}

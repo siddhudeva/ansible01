@@ -4,25 +4,24 @@ def call() {
             label "${BUILD_LABEL}"
         }
 
-///        triggers {
-//            pollSCM('H/2 * * * *')
-//       }
+//    triggers {
+//      pollSCM('H/2 * * * *')
+//    }
+
+        environment {
+            PROG_LANG_NAME = "nodejs"
+            PROG_LANG_VERSION = "6"
+            NEXUS = credentials('NEXUS')
+        }
 
         stages {
+
             stage('Label Builds') {
                 steps {
                     script {
                         env.gitTag = GIT_BRANCH.split('/').last()
                         addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${gitTag}"
                     }
-                }
-            }
-
-            stage('Deploy') {
-                when { tag "release-*" }
-                steps {
-                    echo 'Deploying only because this commit is tagged...'
-                    sh 'make deploy'
                 }
             }
 
@@ -34,32 +33,151 @@ def call() {
                     }
                 }
             }
-            stage('Lint checks') {
+
+            stage('Lint Checks') {
                 steps {
-                    echo 'lint checks'
-                   sh 'echo env'
+                    sh 'echo Lint Cases'
                 }
             }
 
-            stage('publish artifactes') {
+            stage('Test Cases') {
                 steps {
-                    script{
-                        common.Pubishartifacts()
+                    sh 'echo Test Cases'
+                    sh 'env'
+                }
+            }
+
+            stage('Publish Artifacts') {
+                when {
+                    expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true' ]) }
+                }
+                steps {
+                    script {
+//                        common.prepareArtifacts()
+                        common.publishArtifacts()
                     }
                 }
             }
 
-            stage('sample') {
-                steps {
-                    echo 'sample'
-                }
+        }
 
+        post {
+            always {
+                cleanWs()
             }
         }
+
     }
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//def call() {
+//    pipeline {
+//        agent {
+//            label "${BUILD_LABEL}"
+//        }
+//
+/////        triggers {
+////            pollSCM('H/2 * * * *')
+////       }
+//
+//        stages {
+//            stage('Label Builds') {
+//                steps {
+//                    script {
+//                        env.gitTag = GIT_BRANCH.split('/').last()
+//                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${gitTag}"
+//                    }
+//                }
+//            }
+//
+//            stage('Deploy') {
+//                when { tag "release-*" }
+//                steps {
+//                    echo 'Deploying only because this commit is tagged...'
+//                    sh 'make deploy'
+//                }
+//            }
+//
+//
+//            stage('Check the Code Quality') {
+//                steps {
+//                    script {
+//                        common.sonarQube()
+//                    }
+//                }
+//            }
+//            stage('Lint checks') {
+//                steps {
+//                    echo 'lint checks'
+//                   sh 'echo env'
+//                }
+//            }
+//
+//            stage('publish artifactes') {
+//                steps {
+//                    script{
+//                        common.Pubishartifacts()
+//                    }
+//                }
+//            }
+//
+//            stage('sample') {
+//                steps {
+//                    echo 'sample'
+//                }
+//
+//            }
+//        }
+//    }
+//}
+//
+//
 
 
 
