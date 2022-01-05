@@ -41,7 +41,7 @@ def call() {
             }
             stage('Test Cases') {
                 when {
-                    branch 'main'
+                    buildingTag()
                 }
                 steps {
                     sh 'echo Test Cases'
