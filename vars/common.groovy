@@ -8,12 +8,15 @@ def sonarQube() {
 }
 
 def publishArtifacts() {
-  sh 'echo This is ran on when condition'
 //  if(env.GIT_BRANCH == "*tag*") {
 //    println 'Ran on Tag'
 //  } else {
 //    Utils.markStageSkippedForConditional('Publish Artifacts')
 //  }
+  sh '''
+curl -v -u NEXUS_USR:NEXUS_PSW --upload-file ${COMPONENT}.${gitTag}.zip http://172.31.9.5:8081/${COMPONENT}/${COMPONENT}.${gitTag}.zip
+'''
+
 }
 
 def preparingArtifacts() {
