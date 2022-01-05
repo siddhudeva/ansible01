@@ -19,12 +19,9 @@ def publishArtifacts() {
 def preparingArtifacts() {
   if(env.PROG_LANG_NAME == "nodejs" && env.PROG_LANG_VERSION == "4.0") {
     sh '''
-      echo hello
-      echo hai
-      echo this is working
+       npm install
+       ls -ltr
 '''
-  } else {
-    echo 'conditon is worling'
   }
 }
 
