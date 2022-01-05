@@ -8,7 +8,7 @@ def sonarQube() {
 }
 
 def publishArtifacts() {
-  sh 'This is ran on when condition'
+  sh 'echo This is ran on when condition'
 //  if(env.GIT_BRANCH == "*tag*") {
 //    println 'Ran on Tag'
 //  } else {
