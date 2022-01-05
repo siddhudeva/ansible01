@@ -40,9 +40,6 @@ def call() {
                 }
             }
             stage('Test Cases') {
-                when {
-                    buildingTag()
-                }
                 steps {
                     sh 'echo Test Cases'
                     sh 'env'
