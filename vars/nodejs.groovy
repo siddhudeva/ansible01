@@ -47,18 +47,16 @@ def call() {
             }
 
             stage('Publish Artifacts') {
-                when {
-                    expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true']) }
-                }
+//                when {
+//                    expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true']) }
+//                }
                 steps {
                     script {
-                        common.prepareArtifacts()
+//                        common.prepareArtifacts()
                         common.publishArtifacts()
                     }
                 }
             }
-
-
             post {
                 always {
                     cleanWs()
