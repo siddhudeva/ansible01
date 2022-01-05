@@ -8,11 +8,12 @@ def sonarQube() {
 }
 
 def publishArtifacts() {
-  if(env.GIT_BRANCH == "*tag*") {
-    println 'Ran on Tag'
-  } else {
-    Utils.markStageSkippedForConditional('Publish Artifacts')
-  }
+  sh 'This is ran on when condition'
+//  if(env.GIT_BRANCH == "*tag*") {
+//    println 'Ran on Tag'
+//  } else {
+//    Utils.markStageSkippedForConditional('Publish Artifacts')
+//  }
 //  sh '''
 //    curl -f -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}-${gitTag}.zip http://nexus.roboshop.internal:8081/repository/${COMPONENT}/${COMPONENT}-${gitTag}.zip
 //  '''
