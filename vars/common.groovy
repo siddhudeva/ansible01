@@ -17,11 +17,13 @@ def publishArtifacts() {
 }
 
 def preparingArtifacts() {
-  sh '''
-   echo hello
-   echo hai
-   echo this is working
+  if(env.PROG_LANG_NAME == "nodejs" && env.PROG_LANG_VERSION == "6") {
+    sh '''
+      echo hello
+      echo hai
+      echo this is working
 '''
+  }
 }
 
 
