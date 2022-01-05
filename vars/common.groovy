@@ -23,6 +23,8 @@ def preparingArtifacts() {
       echo hai
       echo this is working
 '''
+  } else {
+    echo 'conditon is worling'
   }
 }
 
