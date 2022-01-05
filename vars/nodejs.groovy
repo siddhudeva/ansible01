@@ -7,12 +7,10 @@ def call() {
 //    triggers {
 //      pollSCM('H/2 * * * *')
 //    }
-
-//        environment {
-//            PROG_LANG_NAME = "nodejs"
-//            PROG_LANG_VERSION = "6"
-//            NEXUS = credentials('NEXUS')
-//        }
+        environment {
+           PROG_LANG_NAME = "nodejs"
+           PROG_LANG_VERSION = "6"
+        }
 
         stages {
 
@@ -45,6 +43,13 @@ def call() {
                     sh 'env'
                 }
             }
+            stage('preparing artifacts') {
+                steps{
+                    script{
+                        common.preparingArtifacts()
+                    }
+                }
+            }
 
             stage('Publish Artifacts') {
                 when {
@@ -52,7 +57,6 @@ def call() {
                 }
                 steps {
                     script {
-//                       common.prepareArtifacts()
                         common.publishArtifacts()
                     }
                 }
