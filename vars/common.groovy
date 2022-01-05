@@ -17,19 +17,19 @@ def publishArtifacts() {
 //    curl -f -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}-${gitTag}.zip http://nexus.roboshop.internal:8081/repository/${COMPONENT}/${COMPONENT}-${gitTag}.zip
 //  '''
 }
-
-def prepareArtifacts() {
-  if(env.PROG_LANG_NAME == "nodejs" && env.PROG_LANG_VERSION == "6") {
-    sh '''
-      npm install 
-      zip -r ${COMPONENT}-${gitTag}.zip node_modules server.js
-      ls -ltr
-    '''
-  }
-  // Java
-  // Python
-  // Golang
-}
+//
+//def prepareArtifacts() {
+//  if(env.PROG_LANG_NAME == "nodejs" && env.PROG_LANG_VERSION == "6") {
+//    sh '''
+//      npm install
+//      zip -r ${COMPONENT}-${gitTag}.zip node_modules server.js
+//      ls -ltr
+//    '''
+//  }
+//  // Java
+//  // Python
+//  // Golang
+//}
 
 
 ////import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
