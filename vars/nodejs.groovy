@@ -40,6 +40,9 @@ def call() {
                 }
             }
             stage('Test Cases') {
+                when {
+                    branch 'main'
+                }
                 steps {
                     sh 'echo Test Cases'
                     sh 'env'
