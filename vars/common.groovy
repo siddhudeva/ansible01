@@ -52,8 +52,9 @@ def preparingArtifacts() {
      go mod init dispatch
      go get 
      go build 
-    fi
      zip -r ${COMPONENT}.${gitTag}.zig main.go go.sum go.mod dispatch 
+     exit
+    fi
 
      '''
   }
