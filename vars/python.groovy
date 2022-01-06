@@ -84,7 +84,7 @@ def call() {
 //        }
 //        stages {
 //            stage('One-Sequential') {
-//                steps {
+///               steps {
 //                    sh 'echo ${COMPONENT} is success'
 //                }
 //            }
