@@ -42,10 +42,16 @@ def preparingArtifacts() {
   }
   if(env.PROG_LANG_NAME == "golang" && env.PROG_LANG_VERSION == "1.15") {
     sh'''
-     ls -ltr
+     ls -ltr | grep go.mod 
+       if [ '$?' -eq 0 ];then 
+     go get 
+     go build  
+    exit 
+     else 
      go mod init dispatch
      go get 
      go build 
+    fi
      ls -ltr
      '''
   }
