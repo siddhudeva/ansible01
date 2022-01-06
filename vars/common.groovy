@@ -37,7 +37,7 @@ def preparingArtifacts() {
   }
   if(env.PROG_LANG_NAME == "python" && env.PROG_LANG_VERSION == "3") {
     sh'''
-      zip -r ${COMPONENT}.${gitTag}.zig *.py ${COMPONENT}.ini requirements.txt
+      zip -r ../${COMPONENT}.${gitTag}.zig *.py ${COMPONENT}.ini requirements.txt
      '''
   }
   if(env.PROG_LANG_NAME == "golang" && env.PROG_LANG_VERSION == "1.15") {
@@ -45,7 +45,7 @@ def preparingArtifacts() {
      go mod init dispatch
      go build
      go get
-     zip -r ${COMPONENT}.${gitTag}.zig ${COMPONENT}
+     zip -r ../${COMPONENT}.${gitTag}.zig ${COMPONENT}
      '''
   }
   if(env.PROG_LANG_NAME == "angular") {
