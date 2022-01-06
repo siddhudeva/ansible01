@@ -43,16 +43,18 @@ def preparingArtifacts() {
   if(env.PROG_LANG_NAME == "golang" && env.PROG_LANG_VERSION == "1.15") {
     sh'''
      ls -ltr | grep go.mod 
-       if [ '$?' -eq 0 ];then 
+       if [ "$?" -eq 0 ];then 
      go get 
-     go build  
+     go build 
+     zip -r ${COMPONENT}.${gitTag}.zig main.go go.sum go.mod dispatch 
     exit 
      else 
      go mod init dispatch
      go get 
      go build 
     fi
-     ls -ltr
+     zip -r ${COMPONENT}.${gitTag}.zig main.go go.sum go.mod dispatch 
+
      '''
   }
 }
