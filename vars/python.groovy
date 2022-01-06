@@ -10,6 +10,7 @@ def call() {
         environment {
             PROG_LANG_NAME = "python"
             PROG_LANG_VERSION = "3"
+            NEXUS = credentials('NEXUS')
         }
 
         stages {
