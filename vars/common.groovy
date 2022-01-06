@@ -14,7 +14,7 @@ def publishArtifacts() {
 //    Utils.markStageSkippedForConditional('Publish Artifacts')
 //  }
   sh '''
-curl -v -u admin:Admin123 --upload-file ${COMPONENT}.${gitTag}.zip http://44.200.151.29:8081/repository/${COMPONENT}/
+curl -v -u admin:Admin123 --upload-file ${COMPONENT}.${gitTag}.zip http://44.200.151.29:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
 '''
 
 }
@@ -40,12 +40,13 @@ def preparingArtifacts() {
       zip -r ${COMPONENT}.${gitTag}.zig *.py ${COMPONENT}.ini requirements.txt
      '''
   }
-  if(env.PROG_LANG_NAME == "golang" && env.PROG_LANG_VERSION == "") {
+  if(env.PROG_LANG_NAME == "golang" && env.PROG_LANG_VERSION == "1.15") {
     sh'''
+     ls -ltr
      go mod init dispatch
      go get 
      go build 
-     
+     ls -ltr
      '''
   }
 }
