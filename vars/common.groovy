@@ -27,7 +27,29 @@ def preparingArtifacts() {
        ls -ltr
 '''
   }
+  if(env.PROG_LANG_NAME == "maven" && env.PROG_LANG_VERSION == "3.0") {
+    sh'''
+       mvn clean package
+       mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+       zip -r ${COMPONENT}.${gitTag}.zip ${COMPONENT}.jar
+
+'''
+  }
+  if(env.PROG_LANG_NAME == "python" && env.PROG_LANG_VERSION == "3") {
+    sh'''
+      zip -r ${COMPONENT}.${gitTag}.zig *.py,*.ini,requirement.txt
+     '''
+  }
+  if(env.PROG_LANG_NAME == "golang" && env.PROG_LANG_VERSION == "") {
+    sh'''
+     go mod init dispatch
+     go get 
+     go build 
+     
+     '''
+  }
 }
+
 
 
 
@@ -100,3 +122,4 @@ def preparingArtifacts() {
 //    Utils.markStageSkippedForConditional('publish artifactes')
 // }
 //}
+//
