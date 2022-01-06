@@ -14,7 +14,7 @@ def publishArtifacts() {
 //    Utils.mark  StageSkippedForConditional('Publish Artifacts')
 //  }
   sh '''
-     curl -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}.${gitTag}.zip http://nexus.roboshop.internal:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
+curl -f -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}.${gitTag}.zip http://nexus.roboshop.internal:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
 '''
 
 }
@@ -49,9 +49,10 @@ def preparingArtifacts() {
      '''
   }
   if(env.PROG_LANG_NAME == "angular") {
-    sh'''
-     zip -r ${COMPONENT}.${gitTag}.zig ${COMPONENT} *
-     '''
+    sh '''
+      cd static
+      zip -r ../${COMPONENT}-${gitTag}.zip * 
+    '''
   }
 
 }
