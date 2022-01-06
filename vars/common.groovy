@@ -27,7 +27,7 @@ def preparingArtifacts() {
        ls -ltr
 '''
   }
-  if(env.PROG_LANG_NAME == "maven" && env.PROG_LANG_VERSION == "3.0") {
+  if(env.PROG_LANG_NAME == "java" && env.PROG_LANG_VERSION == "1.8") {
     sh'''
        mvn clean package
        mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
@@ -37,7 +37,7 @@ def preparingArtifacts() {
   }
   if(env.PROG_LANG_NAME == "python" && env.PROG_LANG_VERSION == "3") {
     sh'''
-      zip -r ${COMPONENT}.${gitTag}.zig *.py,*.ini,requirement.txt
+      zip -r ${COMPONENT}.${gitTag}.zig *.py ${COMPONENT}.ini requirements.txt
      '''
   }
   if(env.PROG_LANG_NAME == "golang" && env.PROG_LANG_VERSION == "") {

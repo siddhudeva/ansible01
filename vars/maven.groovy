@@ -8,8 +8,8 @@ def call() {
 //      pollSCM('H/2 * * * *')
 //    }
         environment {
-            PROG_LANG_NAME = "maven"
-            PROG_LANG_VERSION = "3.0"
+            PROG_LANG_NAME = "java"
+            PROG_LANG_VERSION = "1.8"
         }
 
         stages {
