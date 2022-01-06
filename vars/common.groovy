@@ -14,7 +14,7 @@ def publishArtifacts() {
 //    Utils.markStageSkippedForConditional('Publish Artifacts')
 //  }
   sh '''
-curl -v -u admin:Admin123 --upload-file ${COMPONENT}.${gitTag}.zip http://172.31.9.5:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
+curl -v -u admin:Admin123 --upload-file ${COMPONENT}.${gitTag}.zip http://44.200.151.29:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
 '''
 
 }
