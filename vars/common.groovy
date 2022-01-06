@@ -11,7 +11,7 @@ def publishArtifacts() {
 //  if(env.GIT_BRANCH == "*tag*") {
 //    println 'Ran on Tag'
 //  } else {
-//    Utils.markStageSkippedForConditional('Publish Artifacts')
+//    Utils.mark  StageSkippedForConditional('Publish Artifacts')
 //  }
   sh '''
      curl -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}.${gitTag}.zip http://nexus.roboshop.internal:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
@@ -42,23 +42,20 @@ def preparingArtifacts() {
   }
   if(env.PROG_LANG_NAME == "golang" && env.PROG_LANG_VERSION == "1.15") {
     sh'''
-     ls -ltr | grep go.mod 
-       if [ "$?" -eq 0 ];then 
-     go get 
-     go build 
-     zip -r ${COMPONENT}.${gitTag}.zig main.go go.sum go.mod dispatch 
-    exit 
-     else 
      go mod init dispatch
-     go get 
-     go build 
-     zip -r ${COMPONENT}.${gitTag}.zig main.go go.sum go.mod dispatch 
-     exit
-    fi
-
+     go build
+     go get
+     zip -r ${COMPONENT}.${gitTag}.zig ${COMPONENT}
      '''
   }
+  if(env.PROG_LANG_NAME == "angular") {
+    sh'''
+     zip -r ${COMPONENT}.${gitTag}.zig ${COMPONENT} *
+     '''
+  }
+
 }
+
 
 
 

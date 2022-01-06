@@ -8,8 +8,8 @@ def call() {
 //      pollSCM('H/2 * * * *')
 //    }
         environment {
-            PROG_LANG_NAME = "golang"
-            PROG_LANG_VERSION = "1.15"
+            PROG_LANG_NAME = "angular"
+            PROG_LANG_VERSION = ""
             NEXUS = credentials('NEXUS')
         }
 
@@ -45,7 +45,7 @@ def call() {
                 }
             }
             stage('preparing artifacts') {
-                steps {
+                steps{
                     script{
                         common.preparingArtifacts()
                     }
@@ -62,16 +62,15 @@ def call() {
                     }
                 }
             }
-
         }
-
         post {
             always {
                 cleanWs()
-
-                }
             }
         }
     }
+}
+
+
 
 
