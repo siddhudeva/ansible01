@@ -116,7 +116,7 @@ def preparingArtifacts() {
 
 //def Pubishatifacts() {
 //  if(env.GIT_BRANCH == "*tag*") {
-//    println 'this is ran on tag'
+//    println 'this is ran ons tag'
 //  }
 //  else {
 //    Utils.markStageSkippedForConditional('publish artifactes')
