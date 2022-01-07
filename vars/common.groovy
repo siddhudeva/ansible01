@@ -14,7 +14,7 @@ def publishArtifacts() {
 //    Utils.mark  StageSkippedForConditional('Publish Artifacts')
 //  }
   sh '''
-curl -f -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ../${COMPONENT}.${gitTag}.zip http://nexus.roboshop.internal:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
+curl -f -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}.${gitTag}.zip http://nexus.roboshop.internal:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
 '''
 
 }
@@ -37,7 +37,7 @@ def preparingArtifacts() {
   }
   if(env.PROG_LANG_NAME == "python" && env.PROG_LANG_VERSION == "3") {
     sh'''
-      zip -r ../${COMPONENT}.${gitTag}.zig *.py ${COMPONENT}.ini requirements.txt
+      zip -r ${COMPONENT}.${gitTag}.zig *.py ${COMPONENT}.ini requirements.txt
      '''
   }
   if(env.PROG_LANG_NAME == "golang" && env.PROG_LANG_VERSION == "1.15") {
@@ -45,7 +45,7 @@ def preparingArtifacts() {
      go mod init dispatch
      go build
      go get
-     zip -r ../${COMPONENT}.${gitTag}.zig ${COMPONENT}
+     zip -r /${COMPONENT}.${gitTag}.zig ${COMPONENT}
      '''
   }
   if(env.PROG_LANG_NAME == "angular") {
