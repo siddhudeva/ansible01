@@ -54,6 +54,7 @@ def preparingArtifacts() {
       zip -r ../${COMPONENT}-${gitTag}.zip * 
       ls -ltr
       cd ..
+      ls -ltr
 '''
   }
 
