@@ -38,6 +38,8 @@ def preparingArtifacts() {
     sh'''
       ls -ltr
       zip -r ${COMPONENT}.${gitTag}.zig *.py ${COMPONENT}.ini requirements.txt
+      ls -ltr
+      pwd
 '''
   }
   if(env.PROG_LANG_NAME == "golang" && env.PROG_LANG_VERSION == "1.15") {
