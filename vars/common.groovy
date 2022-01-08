@@ -51,11 +51,8 @@ def preparingArtifacts() {
   if(env.PROG_LANG_NAME == "angular") {
     sh '''
       cd static
-       sudo zip -r ../${COMPONENT}-${gitTag}.zip * 
-      ls -ltr
-      cd ..
-      pwd
-      ls -ltr
+      sudo zip -r ../${COMPONENT}-${gitTag}.zip * 
+      mv /home/centos/workspace/CI-Pipelines/frontend/*.zip .
 '''
   }
 
