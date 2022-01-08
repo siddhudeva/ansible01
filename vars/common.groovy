@@ -48,6 +48,8 @@ def preparingArtifacts() {
       go get 
       go build 
       zip -r ${COMPONENT}.${gitTag}.zip ${COMPONENT}
+      ls -ltr
+      pwd
 '''
   }
   if(env.PROG_LANG_NAME == "angular") {
