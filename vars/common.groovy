@@ -53,6 +53,7 @@ def preparingArtifacts() {
       cd static
       sudo zip -r ../${COMPONENT}-${gitTag}.zip * 
       mv /home/centos/workspace/CI-Pipelines/frontend/*.zip .
+      ls -ltr
 '''
   }
 
