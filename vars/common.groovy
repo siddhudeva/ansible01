@@ -14,7 +14,7 @@ def publishArtifacts() {
 //    Utils.mark  StageSkippedForConditional('Publish Artifacts')
 //  }
   sh '''
-sudo curl -v -f -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}.${gitTag}.zip http://nexus1.roboshop.internal:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
+    curl -v -f -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}.${gitTag}.zip http://nexus1.roboshop.internal:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
 '''
 
 }
@@ -24,7 +24,6 @@ def preparingArtifacts() {
     sh '''
        npm install
        zip -r ${COMPONENT}.${gitTag}.zip node_modules server.js
-       ls -ltr
 '''
   }
   if(env.PROG_LANG_NAME == "java" && env.PROG_LANG_VERSION == "1.8") {
@@ -37,6 +36,7 @@ def preparingArtifacts() {
   }
   if(env.PROG_LANG_NAME == "python" && env.PROG_LANG_VERSION == "3") {
     sh'''
+      ls -ltr
       zip -r ${COMPONENT}.${gitTag}.zig *.py ${COMPONENT}.ini requirements.txt
 '''
   }
