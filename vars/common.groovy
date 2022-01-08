@@ -38,8 +38,8 @@ def preparingArtifacts() {
   if(env.PROG_LANG_NAME == "python" && env.PROG_LANG_VERSION == "3") {
     sh'''
       ls -ltr
-      zip -r ${COMPONENT}.${gitTag}.zig *.py ${COMPONENT}.ini requirements.txt
-      ls -lr
+      zip -r ${COMPONENT}.${gitTag}.zip *.py ${COMPONENT}.ini requirements.txt
+      ls -ltr
       pwd
 '''
   }
