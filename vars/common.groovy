@@ -38,7 +38,7 @@ def preparingArtifacts() {
     sh'''
       ls -ltr
       zip -r ${COMPONENT}.${gitTag}.zig *.py ${COMPONENT}.ini requirements.txt
-      ls -ltr
+      ls -lr
       pwd
 '''
   }
