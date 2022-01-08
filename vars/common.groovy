@@ -44,7 +44,6 @@ def preparingArtifacts() {
   }
   if(env.PROG_LANG_NAME == "golang" && env.PROG_LANG_VERSION == "1.15") {
     sh '''
-      rm * .
       go mod init dispatch
       go get 
       go build 
