@@ -51,9 +51,10 @@ def preparingArtifacts() {
   if(env.PROG_LANG_NAME == "angular") {
     sh '''
       cd static
-       sudo zip -r /${COMPONENT}-${gitTag}.zip * 
+       sudo zip -r ../${COMPONENT}-${gitTag}.zip * 
       ls -ltr
       cd ..
+      pwd
       ls -ltr
 '''
   }
