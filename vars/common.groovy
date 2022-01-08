@@ -15,7 +15,7 @@ def publishArtifacts() {
 //  }
   sh '''
     pwd
-    curl -v -f -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}.${gitTag}.zip http://nexus1.roboshop.internal:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
+    curl -v -f -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}.${gitTag}.zip http://3.231.107.170:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
 '''
 
 }
