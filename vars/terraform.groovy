@@ -8,15 +8,15 @@ def call() {
             choice(name: 'ACTION', choices: ['', 'apply', 'destroy'], description: 'Pick action to perform')
 
         }
-        stages {
-            stage('Label Builds') {
-                steps {
-                    script {
-                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${ENVIRONMENT}"
-                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${ACTION}"
-
-                    }
-                }
+//        stages {
+//            stage('Label Builds') {
+//                steps {
+//                    script {
+//                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${ENVIRONMENT}"
+//                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${ACTION}"
+//
+//                    }
+//                }
             }
             stage('Apply terraform actions') {
                 steps {
@@ -35,6 +35,4 @@ def call() {
 
             }
         }
-    }
 
-}
