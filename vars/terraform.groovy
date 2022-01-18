@@ -16,15 +16,15 @@ def call() {
 
         stages {
 
-            stage('Label Builds') {
-                steps {
-                    script {
-                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${ENVIRONMENT}"
-                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${ACTION}"
-
-                    }
-                }
-            }
+//            stage('Label Builds') {
+//                steps {
+//                    script {
+//                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${ENVIRONMENT}"
+//                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${ACTION}"
+//
+//                    }
+//                }
+//            }
             stage('Print variables') {
                 steps {
                 sh 'echo ${ENVIRONMENT}'
