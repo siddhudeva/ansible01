@@ -16,14 +16,19 @@ def call() {
         }
 
         stages {
+            stage( 'printing variables') {
+                steps {
+                    sh env
+                }
+            }
 
             stage('Label Builds') {
                 steps {
                     script {
                         env.gitTag = GIT_BRANCH.split('/').last()
                         addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${gitTag}"
-//                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${ENVIRONMENT}"
-//                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${ACTION}"
+                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${ENVIRONMENT}"
+                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${ACTION}"
                     }
                 }
             }
