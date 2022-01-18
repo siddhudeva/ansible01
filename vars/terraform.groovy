@@ -25,6 +25,12 @@ def call() {
                     }
                 }
             }
+            stage('Print variables') {
+                steps {
+                sh 'echo ${ENVIRONMENT}'
+                sh 'echo ${ACTION}'
+                }
+            }
 
 
             stage('apply terraform actions') {
@@ -36,42 +42,11 @@ def call() {
                 }
             }
         }
-//
-//            stage('Lint Checks') {
-//                steps {
-//                    sh 'echo Lint Cases'
-//                }
-//            }
-//            stage('Test Cases') {
-//                steps {
-//                    sh 'echo Test Cases'
-//                    sh 'env'
-//                }
-//            }
-//            stage('preparing artifacts') {
-//                steps{
-//                    script{
-//                        common.preparingArtifacts()
-//                    }
-//                }
-//            }
-//
-//            stage('Publish Artifacts') {
-//                when {
-//                    expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true']) }
-//                }
-//                steps {
-//                    script {
-//                        common.publishArtifacts()
-//                    }
-//                }
-//            }
-//        }
-//        post {
-//            always {
-//                cleanWs()
-//            }
-//        }
-    }
 
+        post {
+            always {
+                cleanWs()
+            }
+        }
+    }
 }
