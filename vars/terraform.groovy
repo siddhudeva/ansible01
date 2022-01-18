@@ -6,21 +6,21 @@ def call() {
 
         //environment {}
 
-        options {
-            ansiColor('xterm')
-        }
+//        options {
+//            ansiColor('xterm')
+//        }
 
         parameters {
             choice(name: 'ENVIRONMENT', choices: ['', 'dev', 'prod'], description: 'Pick Environment')
             choice(name: 'ACTION', choices: ['', 'apply', 'destroy'], description: 'Pick Terraform Action')
         }
 
-        stages {
-            stage( 'printing variables') {
-                steps {
-                    sh env
-                }
-            }
+//        stages {
+//            stage( 'printing variables') {
+//                steps {
+//                    sh env
+//                }
+//            }
 
 //            stage('Label Builds') {
 //                steps {
@@ -51,7 +51,7 @@ def call() {
         }
 
     }
-}
+
 
 
 //def call() {
