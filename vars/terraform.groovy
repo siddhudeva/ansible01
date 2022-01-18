@@ -22,8 +22,8 @@ def call() {
                     script {
                         env.gitTag = GIT_BRANCH.split('/').last()
                         addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${gitTag}"
-                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${ENVIRONMENT}"
-                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${ACTION}"
+//                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${ENVIRONMENT}"
+//                        addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${ACTION}"
                     }
                 }
             }
