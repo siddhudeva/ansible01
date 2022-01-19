@@ -8,12 +8,14 @@ pipeline {
     parameters {
         choice(name: 'ENVIRONMENT', choices: ['', 'dev', 'prod'], description: 'Pick Environment')
         string(name: 'COMPONENT', defaultValue: '', description: 'Choose a component to Proceed')
+    }
+    stages {
 
-        stages {
-            stage('Get git code') {
+            stage('Get Git Repo') {
                 steps {
-                    dir('code')
-                        git branch: 'main', url: 'https://github.com/siddhudeva/${COMPONENT}.git'
+                    dir('code') {
+                        git branch: 'main', url: "https://github.com/siddhudeva/${COMPONENT}.git"
+                    }
                 }
             }
             stage('apply terraform') {
@@ -29,4 +31,3 @@ pipeline {
             }
         }
     }
-}
