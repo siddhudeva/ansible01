@@ -144,7 +144,7 @@ pipelineJob('Mutable/APP-SETUP') {
                     }
                 }
             }
-            'scriptPath'('Jenkinsfile-mutable')
+            'scriptPath'('Jenkins-Mutable')
             'lightweight'(true)
         }
     }
