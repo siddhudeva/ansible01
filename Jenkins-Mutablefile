@@ -10,16 +10,16 @@ pipeline {
             stage('Get git code') {
                 steps {
                     dir('code')
-                    git branch: 'main', url: 'https://github.com/siddhudeva/${COMPONENT}.git'
+                        git branch: 'main', url: 'https://github.com/siddhudeva/${COMPONENT}.git'
                 }
             }
             stage('apply terraform') {
                 steps {
                     dir('code') {
                         sh '''
-                    cd terraform-mutable
-                    terraform init -backend-config=./env/${ENVIRONMENT}-backend.tfvars
-                    terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                           cd terraform-mutable
+                           terraform init -backend-config=./env/${ENVIRONMENT}-backend.tfvars
+                           terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                        '''
                     }
                 }
