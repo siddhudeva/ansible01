@@ -1,6 +1,9 @@
 pipeline {
     agent {
-        label = WORKSTATION
+        label  'WORKSTATION'
+    }
+    options {
+        ansiColor('xterm')
     }
     parameters {
         choice(name: 'ENVIRONMENT', choices: ['', 'dev', 'prod'], description: 'Pick Environment')
