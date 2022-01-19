@@ -165,7 +165,7 @@ pipelineJob('Mutable/APP-ALB') {
                     }
                 }
             }
-            'scriptPath'('Jenkins-alb-Mutable')
+            'scriptPath'('Jenkins-alb-mutable')
             'lightweight'(true)
         }
     }
