@@ -149,3 +149,24 @@ pipelineJob('Mutable/APP-SETUP') {
         }
     }
 }
+
+pipelineJob('Mutable/APP-ALB') {
+    configure { flowdefinition ->
+        flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
+            'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
+                'userRemoteConfigs' {
+                    'hudson.plugins.git.UserRemoteConfig' {
+                        'url'('https://github.com/siddhudeva/terraform_LB.git')
+                    }
+                }
+                'branches' {
+                    'hudson.plugins.git.BranchSpec' {
+                        'name'('*/main')
+                    }
+                }
+            }
+            'scriptPath'('Jenkins-alb-Mutable')
+            'lightweight'(true)
+        }
+    }
+}
