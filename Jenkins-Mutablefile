@@ -8,6 +8,8 @@ pipeline {
     parameters {
         choice(name: 'ENVIRONMENT', choices: ['', 'dev', 'prod'], description: 'Pick Environment')
         string(name: 'COMPONENT', defaultValue: '', description: 'Choose a component to Proceed')
+        string(name: 'APP_VERSION', defaultValue: '', description: 'Choose a version to deploy')
+
     }
     stages {
 
@@ -24,7 +26,7 @@ pipeline {
                         sh '''
                            cd terraform-mutable
                            terraform init -backend-config=./env/${ENVIRONMENT}-backend.tfvars
-                           terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                           terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars -var APP_VERSION=${APP_VERSION}
                        '''
                     }
                 }
