@@ -15,7 +15,7 @@ def publishArtifacts() {
 //  }
   sh '''
     pwd
-    curl -v -f -u admin:admin123 --upload-file ${COMPONENT}.${gitTag}.zip http://44.202.166.237:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
+    curl -v -f -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}.${gitTag}.zip http://44.202.166.237:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
 '''
 
 }
