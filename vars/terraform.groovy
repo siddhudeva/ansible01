@@ -22,7 +22,7 @@ def call() {
                 steps {
                     script {
                         sh '''
-                          terraform init -backend-config=./env/${ENVIRONMENT}-backend.tfvars  
+                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars  
                            terraform ${ACTION} -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                        '''
                     }
