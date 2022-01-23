@@ -22,7 +22,7 @@ def call() {
                 steps {
                     script {
                         sh '''
-                           pwd
+                           echo this is workstation                       
                            terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars  
                            terraform ${ACTION} -auto-approve -var-file=env/"${ENVIRONMENT}".tfvars
                        '''
@@ -30,12 +30,12 @@ def call() {
                 }
             }
         }
-//        post {
-//            always {
-//                cleanWs()
-//
-//            }
-//        }
+        post {
+            always {
+                cleanWs()
+
+            }
+        }
     }
 
 }
