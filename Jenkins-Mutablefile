@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label  'WORKSTATION'
+        label 'WORKSTATION'
     }
     options {
         ansiColor('xterm')
@@ -13,25 +13,25 @@ pipeline {
     }
     stages {
 
-            stage('Get Git Repo') {
-                steps {
-                    dir('code') {
-                        git branch: 'main', url: "https://github.com/siddhudeva/${COMPONENT}.git"
-                    }
+        stage('Get Git Repo') {
+            steps {
+                dir('code') {
+                    git branch: 'main', url: "https://github.com/siddhudeva/${COMPONENT}.git"
                 }
             }
-            stage('apply terraform') {
-                steps {
-                    dir('code') {
-                        sh '''
+        }
+        stage('apply terraform') {
+            steps {
+                dir('code') {
+                    sh '''
                            cd terraform-mutable
                            terraform init -backend-config=./env/${ENVIRONMENT}-backend.tfvars
                            terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars -var APP_VERSION=${APP_VERSION}
                        '''
-                    }
                 }
             }
         }
+    }
     post {
         always {
             cleanWs()
@@ -39,4 +39,4 @@ pipeline {
         }
     }
 
-    }
+}
