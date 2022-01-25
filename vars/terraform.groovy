@@ -3,6 +3,10 @@ def call() {
         agent {
             label "${BUILD_LABEL}"
         }
+        options {
+            ansiColor('xterm')
+        }
+
         parameters {
             choice(name: 'ENVIRONMENT', choices: ['', 'dev', 'prod'], description: 'Pick environment')
             choice(name: 'ACTION', choices: ['', 'apply', 'destroy'], description: 'Pick action to perform')
