@@ -75,6 +75,8 @@ def call() {
             stage('Apply Terraform Action') {
                 steps {
                     sh '''
+             git clone https://github.com/siddhudeva/terraform-vpc.git
+             cd terraform-vpc
             terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
             terraform ${ACTION} -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
           '''
