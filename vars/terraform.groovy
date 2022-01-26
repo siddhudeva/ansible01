@@ -26,7 +26,6 @@ def call() {
                 steps {
                     script {
                         sh '''
-                           git pull https://github.com/siddhudeva/terraform-vpc.git 
                            terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars  
                            terraform ${ACTION} -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                        '''
