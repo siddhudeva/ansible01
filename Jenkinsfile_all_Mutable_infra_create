@@ -16,7 +16,7 @@ pipeline {
                     git branch: 'main', url: "https://github.com/siddhudeva/terraform-vpc.git"
                     sh '''
                     terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-                    terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                    terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                 '''
                 }
             }
@@ -30,7 +30,7 @@ pipeline {
                             git branch: 'main', url: "https://github.com/siddhudeva/terraform_databases.git.git"
                             sh '''
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                        '''
                         }
                     }
@@ -41,7 +41,7 @@ pipeline {
                         git branch: 'main', url: "https://github.com/siddhudeva/terraform_LB"
                         sh '''
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                        '''
                     }
                   }
@@ -53,7 +53,7 @@ pipeline {
                           sh '''
                           export TF_VAR_APP_VERSION=V1.1.0
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                        '''
                       }
                   }
@@ -65,7 +65,7 @@ pipeline {
                             sh '''
                           export TF_VAR_APP_VERSION=V1.0.4
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                        '''
                         }
                     }
@@ -77,7 +77,7 @@ pipeline {
                             sh '''
                           export TF_VAR_APP_VERSION=V1.1.0
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                        '''
                         }
                     }
@@ -89,7 +89,7 @@ pipeline {
                             sh '''
                           export TF_VAR_APP_VERSION=V1.0.9
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                        '''
                         }
                     }
@@ -101,7 +101,7 @@ pipeline {
                             sh '''
                           export TF_VAR_APP_VERSION=V1.1.0
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                        '''
                         }
                     }
@@ -113,7 +113,7 @@ pipeline {
                         sh '''
                            export TF_VAR_APP_VERSION=V1.1.2
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                        '''
                     }
                   }
@@ -125,7 +125,7 @@ pipeline {
                             sh '''
                            export TF_VAR_APP_VERSION=V1.1.0
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                        '''
                         }
                     }
