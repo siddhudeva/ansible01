@@ -26,9 +26,8 @@ def call() {
                 steps {
                     script {
                         sh '''
-                           echo this is workstation                       
                            terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars  
-                           terraform ${ACTION} -auto-approve -var-file=env/"${ENVIRONMENT}".tfvars
+                           terraform ${ACTION} -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                        '''
                     }
                 }
