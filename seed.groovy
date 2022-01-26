@@ -196,3 +196,24 @@ folder('VPC') {
         }
     }
 }
+
+pipelineJob('Mutable/all_infra_creat_Mutable') {
+    configure { flowdefinition ->
+        flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
+            'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
+                'userRemoteConfigs' {
+                    'hudson.plugins.git.UserRemoteConfig' {
+                        'url'('https://github.com/siddhudeva/ansble01.git')
+                    }
+                }
+                'branches' {
+                    'hudson.plugins.git.BranchSpec' {
+                        'name'('*/main')
+                    }
+                }
+            }
+            'scriptPath'('Jenkinsfile_all_Mutable_infra_create')
+            'lightweight'(true)
+        }
+    }
+}
