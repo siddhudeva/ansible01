@@ -27,7 +27,7 @@ pipeline {
             parallel {
 
                 stage('DB') {
-                    dir('DB') {
+                    dir('db') {
                         git branch: 'main', url: "https://github.com/siddhudeva/terraform_databases.git.git"
                         sh '''
                           terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
@@ -37,7 +37,7 @@ pipeline {
                 }
 
                 stage('ALB') {
-                    dir('ALB') {
+                    dir('alb') {
                         git branch: 'main', url: "https://github.com/siddhudeva/terraform_LB"
                         sh '''
                           terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
@@ -45,7 +45,7 @@ pipeline {
                        '''
                     }
                 }
-                stage('cart') {
+                stage('CART') {
                     dir('cart') {
                         git branch: 'main', url: "https://github.com/siddhudeva/cart.git"
                         sh '''
@@ -55,7 +55,7 @@ pipeline {
                        '''
                     }
                 }
-                stage('catalogue') {
+                stage('CATALOGUE') {
                     dir('catalogue') {
                         git branch: 'main', url: "https://github.com/siddhudeva/catalogue.git"
                         sh '''
@@ -65,7 +65,7 @@ pipeline {
                        '''
                     }
                 }
-                stage('shipping') {
+                stage('SHIPPING') {
                     dir('shipping') {
                         git branch: 'main', url: "https://github.com/siddhudeva/shipping.git"
                         sh '''
@@ -75,7 +75,7 @@ pipeline {
                        '''
                     }
                 }
-                stage('payment') {
+                stage('PAYMENT') {
                     dir('payment') {
                         git branch: 'main', url: "https://github.com/siddhudeva/payment.git"
                         sh '''
@@ -85,7 +85,7 @@ pipeline {
                        '''
                     }
                 }
-                stage('dispatch') {
+                stage('DISPATCH') {
                     dir('dispatch') {
                         git branch: 'main', url: "https://github.com/siddhudeva/dispatch.git"
                         sh '''
@@ -95,7 +95,7 @@ pipeline {
                        '''
                     }
                 }
-                stage('user') {
+                stage('USER') {
                     dir('user') {
                         git branch: 'main', url: "https://github.com/siddhudeva/user.git"
                         sh '''
@@ -105,7 +105,7 @@ pipeline {
                        '''
                     }
                 }
-                stage('frontend') {
+                stage('FORNTEND') {
                     dir('frontend') {
                         git branch: 'main', url: "https://github.com/siddhudeva/frontend.git"
                         sh '''
