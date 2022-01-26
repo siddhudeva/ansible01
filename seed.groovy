@@ -203,7 +203,7 @@ pipelineJob('Mutable/all_infra_creat_Mutable') {
             'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
                 'userRemoteConfigs' {
                     'hudson.plugins.git.UserRemoteConfig' {
-                        'url'('https://github.com/siddhudeva/ansble01.git')
+                        'url'('https://github.com/siddhudeva/ansible01.git')
                     }
                 }
                 'branches' {
@@ -223,7 +223,7 @@ pipelineJob('Mutable/all_infra_Distroy') {
             'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
                 'userRemoteConfigs' {
                     'hudson.plugins.git.UserRemoteConfig' {
-                        'url'('https://github.com/siddhudeva/ansble01.git')
+                        'url'('https://github.com/siddhudeva/ansible01.git')
                     }
                 }
                 'branches' {
