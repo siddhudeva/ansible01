@@ -15,7 +15,7 @@ pipeline {
                 dir('vpc') {
                     git branch: 'main', url: "https://github.com/siddhudeva/terraform-vpc.git"
                     sh '''
-                    terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                    terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                     terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
                 '''
                 }
@@ -29,7 +29,7 @@ pipeline {
                         dir('db') {
                             git branch: 'main', url: "https://github.com/siddhudeva/terraform_databases.git.git"
                             sh '''
-                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                           terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
                        '''
                         }
@@ -40,7 +40,7 @@ pipeline {
                     dir('alb') {
                         git branch: 'main', url: "https://github.com/siddhudeva/terraform_LB"
                         sh '''
-                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                           terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
                        '''
                     }
@@ -52,7 +52,7 @@ pipeline {
                           git branch: 'main', url: "https://github.com/siddhudeva/cart.git"
                           sh '''
                           export TF_VAR_APP_VERSION=V1.1.0
-                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                           terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
                        '''
                       }
@@ -64,7 +64,7 @@ pipeline {
                             git branch: 'main', url: "https://github.com/siddhudeva/catalogue.git"
                             sh '''
                           export TF_VAR_APP_VERSION=V1.0.4
-                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                           terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
                        '''
                         }
@@ -76,7 +76,7 @@ pipeline {
                             git branch: 'main', url: "https://github.com/siddhudeva/shipping.git"
                             sh '''
                           export TF_VAR_APP_VERSION=V1.1.0
-                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                           terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
                        '''
                         }
@@ -88,7 +88,7 @@ pipeline {
                             git branch: 'main', url: "https://github.com/siddhudeva/payment.git"
                             sh '''
                           export TF_VAR_APP_VERSION=V1.0.9
-                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                           terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
                        '''
                         }
@@ -100,7 +100,7 @@ pipeline {
                             git branch: 'main', url: "https://github.com/siddhudeva/dispatch.git"
                             sh '''
                           export TF_VAR_APP_VERSION=V1.1.0
-                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                           terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
                        '''
                         }
@@ -112,7 +112,7 @@ pipeline {
                         git branch: 'main', url: "https://github.com/siddhudeva/user.git"
                         sh '''
                            export TF_VAR_APP_VERSION=V1.1.2
-                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                           terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
                        '''
                     }
@@ -124,7 +124,7 @@ pipeline {
                             git branch: 'main', url: "https://github.com/siddhudeva/frontend.git"
                             sh '''
                            export TF_VAR_APP_VERSION=V1.1.0
-                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                           terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
                        '''
                         }
