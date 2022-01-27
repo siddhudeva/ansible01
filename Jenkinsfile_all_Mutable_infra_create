@@ -13,7 +13,7 @@ pipeline {
         stage('VPC') {
             steps {
                 dir('vpc') {
-                    git branch: 'main', url: "https://github.com/siddhudeva/terraform-vpc.git"
+                    git branch: 'main', url: 'https://github.com/siddhudeva/terraform-vpc.git'
                     sh '''
                     terraform state replace-provider -auto-approve registry.terraform.io/-/vault registry.terraform.io/hashicorp/vault
                     terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
@@ -39,7 +39,7 @@ pipeline {
                 stage('ALB') {
                   steps {
                     dir('alb') {
-                        git branch: 'main', url: "https://github.com/siddhudeva/terraform_LB"
+                        git branch: 'main', url: 'https://github.com/siddhudeva/terraform_LB'
                         sh '''
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                           terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
@@ -50,7 +50,7 @@ pipeline {
                 stage('CART') {
                   steps{
                       dir('cart') {
-                          git branch: 'main', url: "https://github.com/siddhudeva/cart.git"
+                          git branch: 'main', url: 'https://github.com/siddhudeva/cart.git'
                           sh '''
                           export TF_VAR_APP_VERSION=V1.1.0
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
@@ -62,7 +62,7 @@ pipeline {
                 stage('CATALOGUE') {
                     steps {
                         dir('catalogue') {
-                            git branch: 'main', url: "https://github.com/siddhudeva/catalogue.git"
+                            git branch: 'main', url: 'https://github.com/siddhudeva/catalogue.git'
                             sh '''
                           export TF_VAR_APP_VERSION=V1.0.4
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
@@ -74,7 +74,7 @@ pipeline {
                 stage('SHIPPING') {
                     steps {
                         dir('shipping') {
-                            git branch: 'main', url: "https://github.com/siddhudeva/shipping.git"
+                            git branch: 'main', url: 'https://github.com/siddhudeva/shipping.git'
                             sh '''
                           export TF_VAR_APP_VERSION=V1.1.0
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
@@ -86,7 +86,7 @@ pipeline {
                 stage('PAYMENT') {
                     steps {
                         dir('payment') {
-                            git branch: 'main', url: "https://github.com/siddhudeva/payment.git"
+                            git branch: 'main', url: 'https://github.com/siddhudeva/payment.git'
                             sh '''
                           export TF_VAR_APP_VERSION=V1.0.9
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
@@ -98,7 +98,7 @@ pipeline {
                 stage('DISPATCH') {
                     steps {
                         dir('dispatch') {
-                            git branch: 'main', url: "https://github.com/siddhudeva/dispatch.git"
+                            git branch: 'main', url: 'https://github.com/siddhudeva/dispatch.git'
                             sh '''
                           export TF_VAR_APP_VERSION=V1.1.0
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
@@ -110,7 +110,7 @@ pipeline {
                 stage('USER') {
                   steps{
                     dir('user') {
-                        git branch: 'main', url: "https://github.com/siddhudeva/user.git"
+                        git branch: 'main', url: 'https://github.com/siddhudeva/user.git'
                         sh '''
                            export TF_VAR_APP_VERSION=V1.1.2
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
@@ -122,7 +122,7 @@ pipeline {
                 stage('FORNTEND') {
                     steps {
                         dir('frontend') {
-                            git branch: 'main', url: "https://github.com/siddhudeva/frontend.git"
+                            git branch: 'main', url: 'https://github.com/siddhudeva/frontend.git'
                             sh '''
                            export TF_VAR_APP_VERSION=V1.1.0
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
