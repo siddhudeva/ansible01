@@ -15,6 +15,7 @@ pipeline {
                 dir('vpc') {
                     git branch: 'main', url: "https://github.com/siddhudeva/terraform-vpc.git"
                     sh '''
+                    terraform state replace-provider -auto-approve registry.terraform.io/-/vault registry.terraform.io/hashicorp/vault
                     terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                     terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                 '''
