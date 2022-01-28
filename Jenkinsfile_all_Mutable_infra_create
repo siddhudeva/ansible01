@@ -15,8 +15,6 @@ pipeline {
                 dir('vpc') {
                     git branch: 'main', url: 'https://github.com/siddhudeva/terraform-vpc.git'
                     sh '''
-                          pwd 
-                          ip addr                          
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                           terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                    '''
@@ -135,11 +133,11 @@ pipeline {
             }
         }
     }
-//    post {
-//        always {
-//            cleanWs()
-//
-//        }
-//    }
+    post {
+        always {
+            cleanWs()
+
+        }
+    }
 }
 
