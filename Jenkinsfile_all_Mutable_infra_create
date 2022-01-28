@@ -60,17 +60,17 @@ pipeline {
                     }
                 }
                 stage('CATALOGUE') {
-                    steps {
-                        dir('catalogue') {
-                            git branch: 'main', url: 'https://github.com/siddhudeva/catalogue.git'
-                            sh '''
-                               export TF_VAR_APP_VERSION=V1.0.4
-                               cd terraform-mutable
-                               terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-                                terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
-                            '''
-                        }
-                    }
+//                    steps {
+//                        dir('catalogue') {
+//                            git branch: 'main', url: 'https://github.com/siddhudeva/catalogue.git'
+//                            sh '''
+//                               export TF_VAR_APP_VERSION=V1.0.4
+//                               cd terraform-mutable
+//                               terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+//                                terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+//                            '''
+//                        }
+//                    }
                 }
             }
         }
