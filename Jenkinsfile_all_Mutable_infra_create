@@ -15,6 +15,8 @@ pipeline {
                 dir('vpc') {
                     git branch: 'main', url: 'https://github.com/siddhudeva/terraform-vpc.git'
                     sh '''
+                          pwd 
+                           ifconfig -a
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                           terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
                    '''
