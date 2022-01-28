@@ -27,7 +27,7 @@ pipeline {
                 stage('DB') {
                     steps {
                         dir('db') {
-                            git branch: 'main', url: "https://github.com/siddhudeva/terraform_databases.git.git"
+                            git branch: 'main', url: "https://github.com/siddhudeva/terraform_databases.git"
                             sh '''
                                 terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                                 terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
@@ -38,7 +38,7 @@ pipeline {
                 stage('ALB') {
                   steps {
                     dir('alb') {
-                        git branch: 'main', url: 'https://github.com/siddhudeva/terraform_LB'
+                        git branch: 'main', url: 'https://github.com/siddhudeva/terraform_LB.git'
                         sh '''
                           terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                           terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
