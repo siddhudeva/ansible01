@@ -72,6 +72,10 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
+    }
+}
 //                stage('SHIPPING') {
 //                    steps {
 //                        dir('shipping') {
@@ -140,13 +144,8 @@ pipeline {
 //            }
 //        }
 //    }
-                post {
-                    always {
-                        cleanWs()
-
-                    }
-                }
-            }
-        }
-    }
-}
+//                post {
+//                    always {
+//                        cleanWs()
+//
+//                    }
