@@ -59,7 +59,7 @@ pipeline {
                         }
                     }
                 }
-                stage('CATALOGUE') {
+//                stage('CATALOGUE') {
 //                    steps {
 //                        dir('catalogue') {
 //                            git branch: 'main', url: 'https://github.com/siddhudeva/catalogue.git'
@@ -71,7 +71,7 @@ pipeline {
 //                            '''
 //                        }
 //                    }
-                }
+//                }
             }
         }
     }
