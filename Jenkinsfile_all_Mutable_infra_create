@@ -28,7 +28,7 @@ pipeline {
                     sh '''
                                 terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
                                 terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
-                           '''
+                    '''
                 }
             }
         }
