@@ -60,93 +60,91 @@ pipeline {
                         }
                     }
                 }
-//                stage('CATALOGUE') {
-//                    steps {
-//                        dir('catalogue') {
-//                            git branch: 'main', url: 'https://github.com/siddhudeva/catalogue.git'
-//                            sh '''
-//                               export TF_VAR_APP_VERSION=V1.0.4
-//                               cd terraform-mutable
-//                               terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-//                                terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
-//                            '''
-//                        }
-//                    }
-//                }
+                stage('CATALOGUE') {
+                    steps {
+                        dir('catalogue') {
+                            git branch: 'main', url: 'https://github.com/siddhudeva/catalogue.git'
+                            sh '''
+                               export TF_VAR_APP_VERSION=V1.0.4
+                               cd terraform-mutable
+                               terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                               terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                            '''
+                        }
+                    }
+               }
+                stage('SHIPPING') {
+                    steps {
+                        dir('shipping') {
+                            git branch: 'main', url: 'https://github.com/siddhudeva/shipping.git'
+                            sh '''
+                               export TF_VAR_APP_VERSION=V1.1.0
+                               cd terraform-mutable
+                               terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                               terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                           '''
+                        }
+                    }
+                }
+                stage('PAYMENT') {
+                    steps {
+                        dir('payment') {
+                            git branch: 'main', url: 'https://github.com/siddhudeva/payment.git'
+                            sh '''
+                               export TF_VAR_APP_VERSION=V1.0.9
+                               cd terraform-mutable
+                               terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                               terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                            '''
+                        }
+                    }
+                }
+                stage('DISPATCH') {
+                    steps {
+                        dir('dispatch') {
+                            git branch: 'main', url: 'https://github.com/siddhudeva/dispatch.git'
+                            sh '''
+                          export TF_VAR_APP_VERSION=V1.1.0
+                          cd terraform-mutable
+                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                       '''
+                        }
+                    }
+                }
+                stage('USER') {
+                    steps {
+                        dir('user') {
+                            git branch: 'main', url: 'https://github.com/siddhudeva/user.git'
+                            sh '''
+                           export TF_VAR_APP_VERSION=V1.1.2
+                           cd terraform-mutable
+                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                       '''
+                        }
+                    }
+                }
+                stage('FORNTEND') {
+                    steps {
+                        dir('frontend') {
+                            git branch: 'main', url: 'https://github.com/siddhudeva/frontend.git'
+                            sh '''
+                               export TF_VAR_APP_VERSION=V1.1.0
+                               cd terraform-mutable
+                               terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                              terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                           '''
+                        }
+                    }
+                }
             }
         }
     }
+ post {
+     always {
+         cleanWs()
+
+     }
+ }
 }
-//                stage('SHIPPING') {
-//                    steps {
-//                        dir('shipping') {
-//                            git branch: 'main', url: 'https://github.com/siddhudeva/shipping.git'
-//                            sh '''
-//                               export TF_VAR_APP_VERSION=V1.1.0
-//                               cd terraform-mutable
-//                               terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-//                               terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
-//                           '''
-//                        }
-//                    }
-//                }
-//                stage('PAYMENT') {
-//                    steps {
-//                        dir('payment') {
-//                            git branch: 'main', url: 'https://github.com/siddhudeva/payment.git'
-//                            sh '''
-//                               export TF_VAR_APP_VERSION=V1.0.9
-//                               cd terraform-mutable
-//                               terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-//                               terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
-//                            '''
-//                        }
-//                    }
-//                }
-//                stage('DISPATCH') {
-//                    steps {
-//                        dir('dispatch') {
-//                            git branch: 'main', url: 'https://github.com/siddhudeva/dispatch.git'
-//                            sh '''
-//                          export TF_VAR_APP_VERSION=V1.1.0
-//                          cd terraform-mutable
-//                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-//                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
-//                       '''
-//                        }
-//                    }
-//                }
-//                stage('USER') {
-//                    steps {
-//                        dir('user') {
-//                            git branch: 'main', url: 'https://github.com/siddhudeva/user.git'
-//                            sh '''
-//                           export TF_VAR_APP_VERSION=V1.1.2
-//                           cd terraform-mutable
-//                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-//                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
-//                       '''
-//                        }
-//                    }
-//                }
-//                stage('FORNTEND') {
-//                    steps {
-//                        dir('frontend') {
-//                            git branch: 'main', url: 'https://github.com/siddhudeva/frontend.git'
-//                            sh '''
-//                               export TF_VAR_APP_VERSION=V1.1.0
-//                               cd terraform-mutable
-//                               terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-//                              terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
-//                           '''
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-//                post {
-//                    always {
-//                        cleanWs()
-//
-//                    }
