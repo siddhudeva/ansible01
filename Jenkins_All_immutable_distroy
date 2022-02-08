@@ -1,0 +1,116 @@
+pipeline {
+    agent {
+        label 'WORKSTATION'
+    }
+    options {
+        ansiColor('xterm')
+    }
+    parameters {
+        choice(name: 'ENVIRONMENT', choices: ['', 'dev', 'prod'], description: 'Pick Environment')
+    }
+    stages {
+        stage('frontend') {
+            dir('frontend') {
+                git branch: 'main', url: "https://github.com/siddhudeva/frontend.git"
+                sh '''
+                 export TF_VAR_APP_VERSION=V1.1.0
+                 terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                 terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                '''
+            }
+        }
+        stage('cart') {
+            dir('cart') {
+                git branch: 'main', url: "https://github.com/siddhudeva/cart.git"
+                sh '''
+                          export TF_VAR_APP_VERSION=V1.1.0
+                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                       '''
+            }
+        }
+        stage('catalogue') {
+            dir('catalogue') {
+                git branch: 'main', url: "https://github.com/siddhudeva/catalogue.git"
+                sh '''
+                          export TF_VAR_APP_VERSION=V1.0.4
+                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                       '''
+            }
+        }
+        stage('shipping') {
+            dir('shipping') {
+                git branch: 'main', url: "https://github.com/siddhudeva/shipping.git"
+                sh '''
+                          export TF_VAR_APP_VERSION=V1.1.0
+                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                       '''
+            }
+        }
+        stage('payment') {
+            dir('payment') {
+                git branch: 'main', url: "https://github.com/siddhudeva/payment.git"
+                sh '''
+                          export TF_VAR_APP_VERSION=V1.0.9
+                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                       '''
+            }
+        }
+        stage('dispatch') {
+            dir('dispatch') {
+                git branch: 'main', url: "https://github.com/siddhudeva/dispatch.git"
+                sh '''
+                          export TF_VAR_APP_VERSION=V1.1.0
+                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                       '''
+            }
+        }
+        stage('user') {
+            dir('user') {
+                git branch: 'main', url: "https://github.com/siddhudeva/user.git"
+                sh '''
+                           export TF_VAR_APP_VERSION=V1.1.2
+                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                       '''
+            }
+        }
+        stage('ALB') {
+            dir('ALB') {
+                git branch: 'main', url: "https://github.com/siddhudeva/terraform_LB"
+                sh '''
+                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                       '''
+            }
+        }
+        stage('ALB-n-DB') {
+            parallel {
+
+                stage('DB') {
+                    dir('DB') {
+                        git branch: 'main', url: "https://github.com/siddhudeva/terraform_databases.git.git"
+                        sh '''
+                          terraform -init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                       '''
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+
+        }
+    }
+}
+
+
+
+

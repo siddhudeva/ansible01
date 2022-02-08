@@ -1,0 +1,150 @@
+pipeline {
+    agent {
+        label 'WORKSTATION'
+    }
+    options {
+        ansiColor('xterm')
+    }
+    parameters {
+        choice(name: 'ENVIRONMENT', choices: ['', 'dev', 'prod'], description: 'Pick Environment')
+    }
+    stages {
+
+        stage('VPC') {
+            steps {
+                dir('vpc') {
+                    git branch: 'main', url: 'https://github.com/siddhudeva/terraform-vpc.git'
+                    sh '''
+                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                   '''
+                }
+            }
+        }
+        stage('DB') {
+            steps {
+                dir('db') {
+                    git branch: 'main', url: "https://github.com/siddhudeva/terraform_databases.git"
+                    sh '''
+                                terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                                terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                    '''
+                }
+            }
+        }
+        stage('ALB') {
+            steps {
+                dir('alb') {
+                    git branch: 'main', url: 'https://github.com/siddhudeva/terraform-immutable-alb.git'
+                    sh '''
+                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                       '''
+                }
+            }
+        }
+
+        stage('ALB-n-DB') {
+            parallel {
+
+                stage('CART') {
+                    steps {
+                        dir('cart') {
+                            git branch: 'main', url: 'https://github.com/siddhudeva/cart.git'
+                            sh '''
+                               export TF_VAR_APP_VERSION=V1.1.0
+                               cd terraform-immutable
+                               terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                               terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                          '''
+                        }
+                    }
+                }
+                stage('CATALOGUE') {
+                    steps {
+                        dir('catalogue') {
+                            git branch: 'main', url: 'https://github.com/siddhudeva/catalogue.git'
+                            sh '''
+                               export TF_VAR_APP_VERSION=V1.0.4
+                               cd terraform-immutable
+                               terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                               terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                            '''
+                        }
+                    }
+               }
+                stage('SHIPPING') {
+                    steps {
+                        dir('shipping') {
+                            git branch: 'main', url: 'https://github.com/siddhudeva/shipping.git'
+                            sh '''
+                               export TF_VAR_APP_VERSION=V1.1.0
+                               cd terraform-immutable
+                               terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                               terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                           '''
+                        }
+                    }
+                }
+                stage('PAYMENT') {
+                    steps {
+                        dir('payment') {
+                            git branch: 'main', url: 'https://github.com/siddhudeva/payment.git'
+                            sh '''
+                               export TF_VAR_APP_VERSION=V1.0.9
+                               cd terraform-immutable
+                               terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                               terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                            '''
+                        }
+                    }
+                }
+                stage('DISPATCH') {
+                    steps {
+                        dir('dispatch') {
+                            git branch: 'main', url: 'https://github.com/siddhudeva/dispatch.git'
+                            sh '''
+                          export TF_VAR_APP_VERSION=V1.1.0
+                          cd terraform-immutable
+                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                       '''
+                        }
+                    }
+                }
+                stage('USER') {
+                    steps {
+                        dir('user') {
+                            git branch: 'main', url: 'https://github.com/siddhudeva/user.git'
+                            sh '''
+                           export TF_VAR_APP_VERSION=V1.1.2
+                           cd terraform-immutable
+                          terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                          terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                       '''
+                        }
+                    }
+                }
+                stage('FORNTEND') {
+                    steps {
+                        dir('frontend') {
+                            git branch: 'main', url: 'https://github.com/siddhudeva/frontend.git'
+                            sh '''
+                               export TF_VAR_APP_VERSION=V1.1.0
+                               cd terraform-immutable
+                               terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                              terraform apply -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                           '''
+                        }
+                    }
+                }
+            }
+        }
+    }
+ post {
+     always {
+         cleanWs()
+
+     }
+ }
+}
