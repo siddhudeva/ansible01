@@ -6,16 +6,28 @@ def sonarQube() {
 //  sh 'sonar-quality-gate.sh admin admin123 172.31.15.251 ${COMPONENT}'
   println 'SonarQube Testing'
 }
-
-def publishArtifacts() {
 //  if(env.GIT_BRANCH == "*tag*") {
 //    println 'Ran on Tag'
 //  } else {
 //    Utils.mark  StageSkippedForConditional('Publish Artifacts')
 //  }
+//  sh '''
+//  Note : earlier in mutable approach we use below curl command to create and publish artificates and in that -f is enabled which is used to stop failure of publishing
+// curl -v -f -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}.${gitTag}.zip http://44.202.166.237:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
+//    pwd
+def publishArtifacts() {
+sh '''
+    curl -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}.${gitTag}.zip http://nexus.roboshop.internal:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
+'''
+
+}
+def makeAMI() {
   sh '''
-    pwd
-    curl -v -f -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}.${gitTag}.zip http://44.202.166.237:8081/repository/${COMPONENT}/${COMPONENT}.${gitTag}.zip
+    terraform init
+    terraform plan -var.APP_VERSION=${gitTag}
+    terraform apply -auto-approve -var.APP_VERSION=${gitTag}
+    terraform state rm module.cart-ami.aws_ami_from_instance.ami
+    terraform destroy -auto-approve -var.APP_VERSION=${gitTag}
 '''
 
 }
