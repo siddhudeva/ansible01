@@ -40,7 +40,7 @@ folder('immutables') {
 
 def COMPONENT = ["cart", "frontend", "catalogue", "payment", "shipping", "user", "dispatch"]
 
-def SIZEs =  COMPONENT.sizes -1
+def SIZEs =  COMPONENT.size -1
 
 for(i in 0..SIZEs) {
     def j = COMPONENT[i]
