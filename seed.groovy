@@ -134,8 +134,6 @@ folder('VPC') {
     displayName('VPC')
     description('VPC')
 }
-        displayName('VPC')
-        description('DATABASES AND VPC')
         pipelineJob('VPC/Terraform-Databases') {
             configure { flowdefinition ->
                 flowdefinition << delegate.'definition'(class: 'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition', plugin: 'workflow-cps') {
