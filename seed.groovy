@@ -174,14 +174,14 @@ folder('Immutable') {
 def COMPONENT = ["cart", "frontend", "catalogue", "payment", "shipping", "user", "dispatch"]
 def SIZEs =  COMPONENT.size -1
 for(i in 0..SIZEs) {
-    def j = COMPONENT[i]
-    pipelineJob("Immutable/cart") {
+    def s = COMPONENT[i]
+    pipelineJob("Immutable/${s}") {
         configure { flowdefinition ->
             flowdefinition << delegate.'definition'(class: 'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition', plugin: 'workflow-cps') {
                 'scm'(class: 'hudson.plugins.git.GitSCM', plugin: 'git') {
                     'userRemoteConfigs' {
                         'hudson.plugins.git.UserRemoteConfig' {
-                            'url'("https://github.com/siddhudeva/cart.git")
+                            'url'("https://github.com/siddhudeva/${s}.git")
                         }
                     }
                     'branches' {
