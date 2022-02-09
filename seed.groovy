@@ -37,13 +37,13 @@ folder('immutables') {
     displayName('CI-Pipelines')
     description('CI-Pipelines')
 }
-//
-//def COMPONENT = ["cart", "frontend", "catalogue", "payment", "shipping", "user", "dispatch"]
-//
-//def SIZEs =  COMPONENT.size -1
-//
-//for(i in 0..SIZEs) {
-//    def j = COMPONENT[i]
+
+def COMPONENT = ["cart", "frontend", "catalogue", "payment", "shipping", "user", "dispatch"]
+
+def SIZEs =  COMPONENT.size -1
+
+for(i in 0..SIZEs) {
+    def j = COMPONENT[i]
     pipelineJob("CI-Pipelines/cart") {
         configure { flowdefinition ->
             flowdefinition << delegate.'definition'(class: 'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition', plugin: 'workflow-cps') {
@@ -64,9 +64,6 @@ folder('immutables') {
             }
         }
     }
-
-
-
 
 
 ////freeStyleJob('Roboshop') {
@@ -137,85 +134,17 @@ folder('immutables') {
 //}
 
 
-folder('Mutable') {
-    displayName('Mutable')
-    description('Mutable')
-}
-pipelineJob('Mutable/VPC') {
-    configure { flowdefinition ->
-        flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
-            'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
-                'userRemoteConfigs' {
-                    'hudson.plugins.git.UserRemoteConfig' {
-                        'url'('https://github.com/siddhudeva/terraform-vpc.git')
-                    }
-                }
-                'branches' {
-                    'hudson.plugins.git.BranchSpec' {
-                        'name'('*/main')
-                    }
-                }
-            }
-            'scriptPath'('Jenkinsfile')
-            'lightweight'(true)
-        }
+    folder('Mutable') {
+        displayName('Mutable')
+        description('Mutable')
     }
-}
-
-
-pipelineJob('Mutable/APP-SETUP') {
-    configure { flowdefinition ->
-        flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
-            'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
-                'userRemoteConfigs' {
-                    'hudson.plugins.git.UserRemoteConfig' {
-                        'url'('https://github.com/siddhudeva/ansible01.git')
-                    }
-                }
-                'branches' {
-                    'hudson.plugins.git.BranchSpec' {
-                        'name'('*/main')
-                    }
-                }
-            }
-            'scriptPath'('Jenkins-Mutablefile')
-            'lightweight'(true)
-        }
-    }
-}
-
-pipelineJob('Mutable/APP-ALB') {
-    configure { flowdefinition ->
-        flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
-            'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
-                'userRemoteConfigs' {
-                    'hudson.plugins.git.UserRemoteConfig' {
-                        'url'('https://github.com/siddhudeva/terraform_LB.git')
-                    }
-                }
-                'branches' {
-                    'hudson.plugins.git.BranchSpec' {
-                        'name'('*/main')
-                    }
-                }
-            }
-            'scriptPath'('Jenkins-alb-mutable')
-            'lightweight'(true)
-        }
-    }
-}
-
-
-folder('VPC') {
-    displayName('VPC')
-    description('DATABASES AND VPC')
-    pipelineJob('VPC/Terraform-Databases') {
+    pipelineJob('Mutable/VPC') {
         configure { flowdefinition ->
             flowdefinition << delegate.'definition'(class: 'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition', plugin: 'workflow-cps') {
                 'scm'(class: 'hudson.plugins.git.GitSCM', plugin: 'git') {
                     'userRemoteConfigs' {
                         'hudson.plugins.git.UserRemoteConfig' {
-                            'url'('https://github.com/siddhudeva/terraform_databases.git')
+                            'url'('https://github.com/siddhudeva/terraform-vpc.git')
                         }
                     }
                     'branches' {
@@ -229,45 +158,114 @@ folder('VPC') {
             }
         }
     }
-}
 
-pipelineJob('Mutable/all_infra_creat_Mutable') {
-    configure { flowdefinition ->
-        flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
-            'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
-                'userRemoteConfigs' {
-                    'hudson.plugins.git.UserRemoteConfig' {
-                        'url'('https://github.com/siddhudeva/ansible01.git')
+
+    pipelineJob('Mutable/APP-SETUP') {
+        configure { flowdefinition ->
+            flowdefinition << delegate.'definition'(class: 'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition', plugin: 'workflow-cps') {
+                'scm'(class: 'hudson.plugins.git.GitSCM', plugin: 'git') {
+                    'userRemoteConfigs' {
+                        'hudson.plugins.git.UserRemoteConfig' {
+                            'url'('https://github.com/siddhudeva/ansible01.git')
+                        }
+                    }
+                    'branches' {
+                        'hudson.plugins.git.BranchSpec' {
+                            'name'('*/main')
+                        }
                     }
                 }
-                'branches' {
-                    'hudson.plugins.git.BranchSpec' {
-                        'name'('*/main')
-                    }
-                }
+                'scriptPath'('Jenkins-Mutablefile')
+                'lightweight'(true)
             }
-            'scriptPath'('Jenkinsfile_all_Mutable_infra_create')
-            'lightweight'(true)
         }
     }
-}
-pipelineJob('Mutable/all_infra_Distroy') {
-    configure { flowdefinition ->
-        flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
-            'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
-                'userRemoteConfigs' {
-                    'hudson.plugins.git.UserRemoteConfig' {
-                        'url'('https://github.com/siddhudeva/ansible01.git')
+
+    pipelineJob('Mutable/APP-ALB') {
+        configure { flowdefinition ->
+            flowdefinition << delegate.'definition'(class: 'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition', plugin: 'workflow-cps') {
+                'scm'(class: 'hudson.plugins.git.GitSCM', plugin: 'git') {
+                    'userRemoteConfigs' {
+                        'hudson.plugins.git.UserRemoteConfig' {
+                            'url'('https://github.com/siddhudeva/terraform_LB.git')
+                        }
+                    }
+                    'branches' {
+                        'hudson.plugins.git.BranchSpec' {
+                            'name'('*/main')
+                        }
                     }
                 }
-                'branches' {
-                    'hudson.plugins.git.BranchSpec' {
-                        'name'('*/main')
+                'scriptPath'('Jenkins-alb-mutable')
+                'lightweight'(true)
+            }
+        }
+    }
+
+
+    folder('VPC') {
+        displayName('VPC')
+        description('DATABASES AND VPC')
+        pipelineJob('VPC/Terraform-Databases') {
+            configure { flowdefinition ->
+                flowdefinition << delegate.'definition'(class: 'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition', plugin: 'workflow-cps') {
+                    'scm'(class: 'hudson.plugins.git.GitSCM', plugin: 'git') {
+                        'userRemoteConfigs' {
+                            'hudson.plugins.git.UserRemoteConfig' {
+                                'url'('https://github.com/siddhudeva/terraform_databases.git')
+                            }
+                        }
+                        'branches' {
+                            'hudson.plugins.git.BranchSpec' {
+                                'name'('*/main')
+                            }
+                        }
                     }
+                    'scriptPath'('Jenkinsfile')
+                    'lightweight'(true)
                 }
             }
-            'scriptPath'('Jenkins_All_Mutable_distroy')
-            'lightweight'(true)
+        }
+    }
+
+    pipelineJob('Mutable/all_infra_creat_Mutable') {
+        configure { flowdefinition ->
+            flowdefinition << delegate.'definition'(class: 'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition', plugin: 'workflow-cps') {
+                'scm'(class: 'hudson.plugins.git.GitSCM', plugin: 'git') {
+                    'userRemoteConfigs' {
+                        'hudson.plugins.git.UserRemoteConfig' {
+                            'url'('https://github.com/siddhudeva/ansible01.git')
+                        }
+                    }
+                    'branches' {
+                        'hudson.plugins.git.BranchSpec' {
+                            'name'('*/main')
+                        }
+                    }
+                }
+                'scriptPath'('Jenkinsfile_all_Mutable_infra_create')
+                'lightweight'(true)
+            }
+        }
+    }
+    pipelineJob('Mutable/all_infra_Distroy') {
+        configure { flowdefinition ->
+            flowdefinition << delegate.'definition'(class: 'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition', plugin: 'workflow-cps') {
+                'scm'(class: 'hudson.plugins.git.GitSCM', plugin: 'git') {
+                    'userRemoteConfigs' {
+                        'hudson.plugins.git.UserRemoteConfig' {
+                            'url'('https://github.com/siddhudeva/ansible01.git')
+                        }
+                    }
+                    'branches' {
+                        'hudson.plugins.git.BranchSpec' {
+                            'name'('*/main')
+                        }
+                    }
+                }
+                'scriptPath'('Jenkins_All_Mutable_distroy')
+                'lightweight'(true)
+            }
         }
     }
 }
