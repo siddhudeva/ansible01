@@ -14,6 +14,12 @@ def call() {
         }
 
         stages {
+            stage('init') {
+                scripts {
+                    library "shared-Roboshop@main"
+                    }
+                }
+
 
             stage('Label Builds') {
                 steps {
