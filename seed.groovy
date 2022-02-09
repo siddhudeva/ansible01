@@ -33,11 +33,10 @@ for(i in 0..SIZE) {
 }
 
 
-folder('immutables') {
-    displayName('CI-Pipelines')
-    description('CI-Pipelines')
-
-
+folder('Immutable') {
+    displayName('Immutable')
+    description('Immutable')
+}
 def COMPONENT = ["cart", "frontend", "catalogue", "payment", "shipping", "user", "dispatch"]
 def SIZEs =  COMPONENT.size -1
 for(i in 0..SIZEs) {
@@ -62,7 +61,7 @@ for(i in 0..SIZEs) {
             }
         }
     }
-}
+
 
 
     folder('Mutable') {
