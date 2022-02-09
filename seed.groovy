@@ -133,7 +133,7 @@ for(i in 0..SIZEs) {
 folder('VPC') {
     displayName('VPC')
     description('VPC')
-}
+
         pipelineJob('VPC/Terraform-Databases') {
             configure { flowdefinition ->
                 flowdefinition << delegate.'definition'(class: 'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition', plugin: 'workflow-cps') {
@@ -154,6 +154,7 @@ folder('VPC') {
                 }
             }
         }
+}
 
     pipelineJob('Mutable/all_infra_creat_Mutable') {
         configure { flowdefinition ->
