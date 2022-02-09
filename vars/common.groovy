@@ -23,11 +23,12 @@ sh '''
 }
 def makeAMI() {
   sh '''
-    terraform init
-    terraform plan -var.APP_VERSION=${gitTag}
-    terraform apply -auto-approve -var.APP_VERSION=${gitTag}
-    terraform state rm module.cart-ami.aws_ami_from_instance.ami
-    terraform destroy -auto-approve -var.APP_VERSION=${gitTag}
+pwd
+//    terraform init
+//    terraform plan -var.APP_VERSION=${gitTag}
+//    terraform apply -auto-approve -var.APP_VERSION=${gitTag}
+//    terraform state rm module.cart-ami.aws_ami_from_instance.ami
+//    terraform destroy -auto-approve -var.APP_VERSION=${gitTag}
 '''
 
 }
