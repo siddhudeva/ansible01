@@ -38,13 +38,13 @@ folder('immutables') {
     description('CI-Pipelines')
 }
 
-def COMPONENT = ["cart", "frontend", "catalogue", "payment", "shipping", "user", "dispatch"]
-
-def SIZEs =  COMPONENT.size -1
-
-for(i in 0..SIZEs) {
-    def j = COMPONENT[i]
-    pipelineJob("CI-Pipelines/cart") {
+//def COMPONENT = ["cart", "frontend", "catalogue", "payment", "shipping", "user", "dispatch"]
+//
+//def SIZEs =  COMPONENT.size -1
+//
+//for(i in 0..SIZEs) {
+//    def j = COMPONENT[i]
+    pipelineJob("IMMUTABLE/cart") {
         configure { flowdefinition ->
             flowdefinition << delegate.'definition'(class: 'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition', plugin: 'workflow-cps') {
                 'scm'(class: 'hudson.plugins.git.GitSCM', plugin: 'git') {
@@ -268,4 +268,4 @@ for(i in 0..SIZEs) {
             }
         }
     }
-}
+//}
